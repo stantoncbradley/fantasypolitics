@@ -6,14 +6,14 @@ class ImportController < ApplicationController
 
 
 
-  @will_import = false
+  WILL_IMPORT = false
   before_action :check_intent
 
 
 
   def check_intent
     warning_message = "Are you sure? Flip the switch in `app/controllers/import_controller.rb`..."
-    render :text => warning_message and return unless @will_import 
+    render :text => warning_message and return unless WILL_IMPORT
   end
 
 
