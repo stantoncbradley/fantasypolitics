@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fantasy Politics</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= content_for :stylesheets %>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= content_for :javascripts %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <%= yield %>
+
+</body>
+</html>
