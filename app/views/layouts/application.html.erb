@@ -7,10 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
-
+  <div class="container-narrow">
+    <div class="masthead">
+      <%= render 'layouts/user_header' %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <h3 class="muted"><%= link_to "Fantasy Politics", root_path %></h3>
+      <h5 class="muted">Lorem Ipsum Dolor...</h5>
+    </div>
+    <hr />
+    <%= yield %>
+  </div>
 </body>
 </html>
