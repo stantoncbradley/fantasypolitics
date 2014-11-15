@@ -1,11 +1,23 @@
-<%= render partial: 'layouts/header' %>
+<div id="wrapper">
 
-<div class="page-row page-row-expanded">
+    <%= render partial: 'layouts/header' %>
 
-  <%= yield %>
+    <div class="page-content-wrapper">
+      <div class="container-fluid">
 
+        <%= yield %>
+
+      </div>
+    </div>
+
+    <%= render partial: 'layouts/footer' %>
 </div>
 
-<%= render partial: "layouts/footer" %>
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
 
 <% parent_layout 'base' %>

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :leagues
 
+  get 'users/:id', to: 'users#show', as: 'user_show'
+
   devise_for :users
-  root 'home#index'
+  root 'home#index', as: 'landing_page'
 
 end
