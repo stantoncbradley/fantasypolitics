@@ -13,4 +13,5 @@ gem 'spring', group: :development
 gem 'unicorn-rails'
 
 gem 'devise'
+gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
