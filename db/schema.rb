@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115180752) do
+ActiveRecord::Schema.define(version: 20141115215654) do
 
   create_table "bills", force: true do |t|
     t.integer  "sponsor"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141115180752) do
     t.string   "last_name"
     t.string   "party"
     t.string   "state"
-    t.string   "biography"
+    t.text     "biography"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
