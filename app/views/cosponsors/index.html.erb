@@ -1,0 +1,23 @@
+<h1>Listing cosponsors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cosponsors.each do |cosponsor| %>
+      <tr>
+        <td><%= link_to 'Show', cosponsor %></td>
+        <td><%= link_to 'Edit', edit_cosponsor_path(cosponsor) %></td>
+        <td><%= link_to 'Destroy', cosponsor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cosponsor', new_cosponsor_path %>
