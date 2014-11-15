@@ -33,7 +33,7 @@ class Sunlight
       json = JSON.parse(@resp.body)
     end
 
-    json
+    json.symbolize_keys
   end
 
 
@@ -57,7 +57,6 @@ class Sunlight
       retry
     end
   end
-
 
 
 
