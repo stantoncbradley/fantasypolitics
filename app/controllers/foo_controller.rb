@@ -1,8 +1,8 @@
 class FooController < ApplicationController
-
-  #skip_before_filter :authenticate_user!
+  require 'sunlight_api'
 
   def index
-    render :file => 'static_pages/home'
+    resp = Sunlight.call_api("legislators", 1).symbolize_keys
+    render :json => resp
   end
 end
