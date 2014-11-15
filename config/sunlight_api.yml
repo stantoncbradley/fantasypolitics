@@ -1,0 +1,6 @@
+development:
+  key: "146a7f07a1104cdf8e298db177d42b22"
+test:
+  key: "146a7f07a1104cdf8e298db177d42b22"
+production:
+  key: "146a7f07a1104cdf8e298db177d42b22"
