@@ -142,3 +142,13 @@
   max-height: 155px;
   overflow-y: scroll;
 }
+
+#politicians-table {
+  > tbody {
+    > tr:hover {
+      > td {
+        background-color: whitesmoke;
+      }
+    }
+  }
+}
