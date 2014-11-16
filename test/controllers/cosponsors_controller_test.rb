@@ -8,7 +8,7 @@ class CosponsorsControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:Sponsors)
+    assert_not_nil assigns(:sponsors)
   end
 
   test "should get new" do

@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% @leagues.each do |l| %>
-        <tr>
+        <tr onclick="location.href='<%= league_path(l) %>'">
           <td><%= l.name %></td>
         </tr>
       <%  end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116072622) do
+ActiveRecord::Schema.define(version: 20141116075137) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -78,14 +78,6 @@ ActiveRecord::Schema.define(version: 20141116072622) do
     t.string   "contact_form"
     t.string   "oc_email"
     t.string   "ocd_id"
-  end
-
-  create_table "politicians_bills", force: true do |t|
-    t.integer  "politician_id"
-    t.integer  "bill_id"
-    t.boolean  "vote"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "rosters", force: true do |t|

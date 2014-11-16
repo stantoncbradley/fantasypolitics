@@ -14,7 +14,7 @@
   </thead>
   <tbody>
   <% @league_user.politicians.each do |p| %>
-      <tr>
+      <tr onclick="location.href='<%= politician_path(p) %>'">
         <td><%= "#{p.first_name} #{p.last_name}" %></td>
         <td><%= p.party %></td>
         <td><%= p.state %></td>

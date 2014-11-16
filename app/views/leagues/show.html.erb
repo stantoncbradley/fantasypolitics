@@ -4,7 +4,6 @@
 
 <table id="politicians-table" class="table table-responsive">
   <thead>
-    <th>Rank</th>
     <th>Name</th>
     <th>Wins</th>
     <th>Losses</th>
@@ -12,9 +11,8 @@
     <th>Points</th>
   </thead>
   <tbody>
-  <% @league.league_users.order('points, DESC').each_with_index do |lu,i| %>
-      <tr>
-        <td><%= i %></td>
+  <% @league.league_users do |lu| %>
+      <tr onclick="location.href='<%= league_user_path(lu) %>'">
         <td><%= lu.team_name %></td>
         <td><%= lu.wins %></td>
         <td><%= lu.losses %></td>
