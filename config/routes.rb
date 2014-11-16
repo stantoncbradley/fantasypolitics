@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :bills
 
-  resources :cosponsors
+  resources :sponsors
 
   resources :politician_bills
 

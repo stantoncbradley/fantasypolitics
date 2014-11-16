@@ -314,7 +314,7 @@ class ImportController < ApplicationController
 
       politicians.each do |p|
         if p.id.present? and bill.id.present?
-          Cosponsor.create(
+          Sponsor.create(
             bill_id: bill.id,
             politician_id: p.id
           )

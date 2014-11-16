@@ -2,13 +2,13 @@ require 'test_helper'
 
 class CosponsorsControllerTest < ActionController::TestCase
   setup do
-    @cosponsor = cosponsors(:one)
+    @sponsor = cosponsors(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:cosponsors)
+    assert_not_nil assigns(:Sponsors)
   end
 
   test "should get new" do
@@ -18,30 +18,30 @@ class CosponsorsControllerTest < ActionController::TestCase
 
   test "should create cosponsor" do
     assert_difference('Cosponsor.count') do
-      post :create, cosponsor: {  }
+      post :create, sponsor: {  }
     end
 
-    assert_redirected_to cosponsor_path(assigns(:cosponsor))
+    assert_redirected_to cosponsor_path(assigns(:sponsor))
   end
 
   test "should show cosponsor" do
-    get :show, id: @cosponsor
+    get :show, id: @sponsor
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @cosponsor
+    get :edit, id: @sponsor
     assert_response :success
   end
 
   test "should update cosponsor" do
-    patch :update, id: @cosponsor, cosponsor: {  }
-    assert_redirected_to cosponsor_path(assigns(:cosponsor))
+    patch :update, id: @sponsor, sponsor: {  }
+    assert_redirected_to cosponsor_path(assigns(:sponsor))
   end
 
   test "should destroy cosponsor" do
     assert_difference('Cosponsor.count', -1) do
-      delete :destroy, id: @cosponsor
+      delete :destroy, id: @sponsor
     end
 
     assert_redirected_to cosponsors_path
