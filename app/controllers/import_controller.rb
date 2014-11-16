@@ -27,6 +27,8 @@ class ImportController < ApplicationController
       import_bills
     when "votes"
       import_votes
+    when "cosponsors"
+      import_cosponsors
     end
 
 
@@ -79,7 +81,7 @@ class ImportController < ApplicationController
 
 
     (1..resp[:pages]).each do |page|
-      results += Sunlight.call_api("legislators", page).symbolize_keys[:results]
+      results += Sunlight.call_api("legislators", page)[:results]
     end
 
     results.each do |legislator|
@@ -181,7 +183,7 @@ class ImportController < ApplicationController
 
     puts resp[:pages] and return
     (1..resp[:pages]).each do |page|
-      results += Sunlight.call_api("bills", page).symbolize_keys[:results]
+      results += Sunlight.call_api("bills", page)[:results]
     end
 
     results.each do |bill|
@@ -240,9 +242,8 @@ class ImportController < ApplicationController
     results       = Array.new
 
 
-    puts resp[:pages] and return
     (1..resp[:pages]).each do |page|
-      results += Sunlight.call_api("votes", page).symbolize_keys[:results]
+      results += Sunlight.call_api("votes", page)[:results]
     end
 
     results.each do |vote|
@@ -261,6 +262,68 @@ class ImportController < ApplicationController
     end
 
     render :json => results    
+  end
+
+
+
+  def import_cosponsors
+    # Same response format:
+    #
+    # "bill_id":"hres752-113"
+    # "cosponsor_ids":[]
+
+    # "bill_id":"hres751-113"
+    # "cosponsor_ids":["C001080"
+    # "F000010"
+    # "H001034"
+    # "L000551"
+    # "M001160"
+    # "N000179"
+    # "S001177"
+    # "S001175"
+    # "T000468"
+    # "V000081"]
+    #
+    # Schema:
+    # t.integer "politician_id"
+    # t.string  "bill_id" 
+    #
+    resp          = Sunlight.get_cosponsors("bills", 1)
+    resp[:pages]  = (resp[:count] / 50.0).ceil
+    results       = Array.new
+
+    puts results
+
+    (1..resp[:pages]).each do |page|
+      results += Sunlight.get_cosponsors("bills", page)[:results]
+    end
+    politician_ids = Array.new
+    politicians    = Array.new
+
+    results.each do |sunlight_bill|
+      puts sunlight_bill.inspect
+      politicians    = []
+      politician_ids = []
+      bill           = Bill.find_by(bill_number: sunlight_bill["bill_id"])
+      politician_ids = sunlight_bill["cosponsor_ids"]
+      next unless politician_ids.present?
+
+      politician_ids.each do |p_id|
+        politicians << Politician.find_by(bioguide_id: p_id)
+      end
+
+      politicians.each do |p|
+        if p.id.present? and bill.id.present?
+          Cosponsor.create(
+            bill_id: bill.id,
+            politician_id: p.id
+          )
+        end
+      end
+    end
+
+    render :json => results  
+
   end
 
 
