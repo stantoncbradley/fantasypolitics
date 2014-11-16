@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116075137) do
+ActiveRecord::Schema.define(version: 20141116095513) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20141116075137) do
   create_table "rosters", force: true do |t|
     t.integer  "league_user_id"
     t.integer  "politician_id"
+    t.integer  "league_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
