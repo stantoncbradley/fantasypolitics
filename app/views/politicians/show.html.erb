@@ -1,5 +1,8 @@
 <div class="page-header">
   <h1><%= "#{@politician.first_name} #{@politician.last_name}" %> <small>(<%= @politician.party %>&#8211;<%= state_name @politician.state %>)</small></h1>
+  <% unless @politician.leadership_role.nil? %>
+      <h3><%= @politician.leadership_role %></h3>
+  <% end %>
 </div>
 
 <div class="panel panel-default">
@@ -8,15 +11,12 @@
   </div>
 
   <ul class="list-group scrolling-sponsor-list">
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
-    <a href="#" class="list-group-item">Cras justo odio</a>
+    <% if @politician.sponsors.any? %>
+        <% @politician.sponsors.each do |sponsor| %>
+            <a href="#" class="list-group-item"><%= sponsor.bill.bill_number %></a>
+        <% end %>
+    <% else %>
+        <a href="#" class="list-group-item" style="text-align: center;">No bills to display</a>
+    <% end %>
   </ul>
 </div>
