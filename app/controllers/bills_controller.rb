@@ -1,47 +1,16 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   respond_to :html
 
   def index
-    @bills = Bill.all
+    @bills = Bill.all.order(last_action_at: :desc).limit(100)
     respond_with(@bills)
   end
 
   def show
+    @bill = Bill.find(params[:id])
     respond_with(@bill)
   end
 
-  def new
-    @bill = Bill.new
-    respond_with(@bill)
-  end
-
-  def edit
-  end
-
-  def create
-    @bill = Bill.new(bill_params)
-    @bill.save
-    respond_with(@bill)
-  end
-
-  def update
-    @bill.update(bill_params)
-    respond_with(@bill)
-  end
-
-  def destroy
-    @bill.destroy
-    respond_with(@bill)
-  end
-
-  private
-    def set_bill
-      @bill = Bill.find(params[:id])
-    end
-
-    def bill_params
-      params[:bill]
-    end
 end
