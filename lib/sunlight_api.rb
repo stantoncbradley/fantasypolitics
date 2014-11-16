@@ -19,7 +19,8 @@ class Sunlight
   # @return JSON object with result
   #
   def self.call_api(request, page)
-    url = BASE_URL + request + "?apikey=" + API_KEY + "$per_page=" + PER_PAGE + "&page=" + page.to_s
+    url = BASE_URL + request + "?apikey=" + API_KEY + "&per_page=" + PER_PAGE.to_s + "&page=" + page.to_s
+    puts url
     uri = URI.parse(url)
 
     http = Net::HTTP.new uri.host, uri.port
