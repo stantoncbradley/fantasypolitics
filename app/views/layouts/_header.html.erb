@@ -5,23 +5,23 @@
     </li>
     <% if user_signed_in? %>
         <li>
-          <%= link_to 'My Leagues', user_show_path(current_user) %>
+          <a href="<%= user_show_path(current_user) %>"><span class="glyphicon glyphicon-home"></span> My Leagues</a>
         </li>
         <li>
-          <%= link_to 'Bills', bills_path %>
+          <a href="<%= bills_path %>"><span class="glyphicon glyphicon-file"></span> Bills</a>
         </li>
         <li>
-          <%= link_to 'Politicians', politicians_path %>
+          <a href="<%= politicians_path %>"><span class="glyphicon glyphicon-user"></span> Politicians</a>
         </li>
         <li>
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+          <a data-method="delete" href="<%= destroy_user_session_path %>"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
         </li>
     <% else %>
         <li>
-          <%= link_to 'Log in', new_user_session_path %>
+          <a href="<%= new_user_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
         </li>
         <li>
-          <%= link_to 'Sign up', new_user_registration_path %>
+          <a href="<%= new_user_registration_path %>"><span class="glyphicon glyphicon-new-window"></span> Sign up</a>
         </li>
     <% end %>
   </ul>

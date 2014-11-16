@@ -143,7 +143,7 @@
   overflow-y: scroll;
 }
 
-#politicians-table {
+.table-hoverable {
   > tbody {
     > tr:hover {
       > td {
