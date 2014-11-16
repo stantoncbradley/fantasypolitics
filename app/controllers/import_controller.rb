@@ -12,16 +12,31 @@ class ImportController < ApplicationController
 
 
   def check_intent
-    warning_message = "Are you sure? Flip the switch in `app/controllers/import_controller.rb`..."
-    render :text => warning_message and return unless WILL_IMPORT
+    warning = "Are you sure? Flip the switch in `app/controllers/import_controller.rb`..."
+    render :text => warning and return unless WILL_IMPORT
   end
 
 
 
-  def legislators
+  def sunlight
+    method = params[:method]
+    case method
+    when "legislators"
+      import_legislators
+    end
+
+
+  end
+
+  private
+
+
+
+  def import_legislators
     resp          = Sunlight.call_api("legislators", 1)
     resp[:pages]  = (resp[:count] / 20.0).ceil
     results       = Array.new
+
 
     (1..resp[:pages]).each do |page|
       results += Sunlight.call_api("legislators", page).symbolize_keys[:results]

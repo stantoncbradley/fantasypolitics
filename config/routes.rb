@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index', as: 'landing_page'
 
-  get '/import/legislators', to: 'import#legislators'
+  get '/import/:method', to: 'import#sunlight'
 
 end
