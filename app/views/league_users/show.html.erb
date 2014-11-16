@@ -17,8 +17,8 @@
       <tr onclick="location.href='<%= politician_path(p) %>'">
         <td><%= "#{p.first_name} #{p.last_name}" %></td>
         <td><%= p.party %></td>
-        <td><%= p.state %></td>
-        <td><%= p.chamber %></td>
+        <td><%= state_name(p.state) %></td>
+        <td><%= p.chamber.capitalize %></td>
         <td><%= p.points %></td>
       </tr>
   <% end %>
