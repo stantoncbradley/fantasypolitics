@@ -5,7 +5,7 @@
     </li>
     <% if user_signed_in? %>
         <li>
-          <%= link_to 'Leagues', leagues_path %>
+          <%= link_to 'My Leagues', user_show_path(current_user) %>
         </li>
         <li>
           <%= link_to 'Bills', bills_path %>

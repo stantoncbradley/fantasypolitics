@@ -11,7 +11,7 @@
     <th>Points</th>
   </thead>
   <tbody>
-  <% @league.league_users do |lu| %>
+  <% @league.league_users.each do |lu| %>
       <tr onclick="location.href='<%= league_user_path(lu) %>'">
         <td><%= lu.team_name %></td>
         <td><%= lu.wins %></td>
