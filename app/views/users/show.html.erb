@@ -3,9 +3,16 @@
 </div>
 
 <table id="user-league-table" class="table table-responsive">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
   <tbody>
-      <tr>League One</tr>
-      <tr>League Two</tr>
-      <tr>League Three</tr>
+    <% @leagues.each do |l| %>
+        <tr>
+          <td><%= l.name %></td>
+        </tr>
+      <%  end %>
   </tbody>
 </table>

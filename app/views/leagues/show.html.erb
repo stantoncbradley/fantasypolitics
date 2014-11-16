@@ -1,4 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @league.name %></h1>
+</div>
 
-<%= link_to 'Edit', edit_league_path(@league) %> |
-<%= link_to 'Back', leagues_path %>
+<table id="politicians-table" class="table table-responsive">
+  <thead>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Ties</th>
+    <th>Points</th>
+  </thead>
+  <tbody>
+  <% @league.league_users.order('points, DESC').each_with_index do |lu,i| %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= lu.team_name %></td>
+        <td><%= lu.wins %></td>
+        <td><%= lu.losses %></td>
+        <td><%= lu.ties %></td>
+        <td><%= lu.points %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

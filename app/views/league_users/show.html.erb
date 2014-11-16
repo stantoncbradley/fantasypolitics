@@ -1,4 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @league_user.team_name %></h1>
+</div>
 
-<%= link_to 'Edit', edit_league_user_path(@league_user) %> |
-<%= link_to 'Back', league_users_path %>
+<table id="politicians-table" class="table table-responsive">
+  <thead>
+  <tr>
+    <th>Politician</th>
+    <th>Party</th>
+    <th>State</th>
+    <th>Chamber</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @league_user.politicians.each do |p| %>
+      <tr>
+        <td><%= "#{p.first_name} #{p.last_name}" %></td>
+        <td><%= p.party %></td>
+        <td><%= p.state %></td>
+        <td><%= p.chamber %></td>
+        <td><%= p.points %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
