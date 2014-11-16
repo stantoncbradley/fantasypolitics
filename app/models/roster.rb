@@ -1,4 +1,4 @@
 class Roster < ActiveRecord::Base
-    has_many :league_users
-    has_many :politicians
+    belongs_to :league_user
+    belongs_to :politician
 end
