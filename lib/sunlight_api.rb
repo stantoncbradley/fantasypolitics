@@ -20,6 +20,31 @@ class Sunlight
   #
   def self.call_api(request, page)
     url = BASE_URL + request + "?apikey=" + API_KEY + "&per_page=" + PER_PAGE.to_s + "&page=" + page.to_s
+    uri = URI.parse(url)
+
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+
+    timeout_and_retry(request) do
+      req = Net::HTTP::Get.new uri.request_uri
+      @resp = http.request req
+    end
+
+    unless @error
+      json = JSON.parse(@resp.body)
+    end
+
+    json.symbolize_keys
+  end
+
+
+
+  # Gets the cosponsors
+  #
+  # @return JSON object with result
+  #
+  def self.get_cosponsors(request, page)
+    url = BASE_URL + request + "?apikey=" + API_KEY + "&per_page=" + PER_PAGE.to_s + "&page=" + page.to_s + "&fields=cosponsor_ids"
     puts url
     uri = URI.parse(url)
 
