@@ -5,6 +5,6 @@ class LeagueUser < ActiveRecord::Base
     has_many :politicians, through: :rosters
 
     def points
-        politicians.inject { |sum,p| sum + p.points }
+        politicians.inject(0) { |sum,p| sum + p.points }
     end
 end

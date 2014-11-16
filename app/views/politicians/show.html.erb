@@ -6,9 +6,9 @@
   <div class="panel-heading">
     <h3 class="panel-title">Sponsored bills</h3>
   </div>
-
+  <% @politician.sponsors.each do |s| %>
   <ul class="list-group scrolling-sponsor-list">
-    <a href="#" class="list-group-item">Cras justo odio</a>
+    <a href="<%= bill_path(s.bill) %>" class="list-group-item">s.bill.number</a>
     <a href="#" class="list-group-item">Cras justo odio</a>
     <a href="#" class="list-group-item">Cras justo odio</a>
     <a href="#" class="list-group-item">Cras justo odio</a>
