@@ -5,16 +5,6 @@
     <div class="page-content-wrapper">
       <div class="container-fluid">
 
-        <% if !flash.empty? %>
-            <div id="flash">
-              <% flash.keys.each do |k| %>
-                  <div class="alert alert-warning">
-                    <%= flash[k] %>
-                  </div>
-              <% end %>
-            </div>
-        <% end %>
-
         <%= yield %>
 
       </div>

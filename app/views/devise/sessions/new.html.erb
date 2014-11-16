@@ -2,6 +2,16 @@
     <h1>Log in</h1>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
 <div class="devise-form-fields">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
