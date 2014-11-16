@@ -23,4 +23,6 @@ Rails.application.routes.draw do
 
   get 'users/:id', to: 'users#show', as: 'user_show'
 
+  get '/import/legislators', to: 'import#legislators'
+
 end
