@@ -1,23 +1,23 @@
-<h1>Listing politicians</h1>
+<div class="page-header">
+  <h1>Politicians</h1>
+</div>
 
-<table>
+<table id="politicians-table" class="table table-responsive">
   <thead>
     <tr>
-      <th colspan="3"></th>
+        <th>Name</th>
+        <th>State</th>
+        <th>Party</th>
+        <th>Chamber</th>
     </tr>
   </thead>
-
   <tbody>
-    <% @politicians.each do |politician| %>
-      <tr>
-        <td><%= link_to 'Show', politician %></td>
-        <td><%= link_to 'Edit', edit_politician_path(politician) %></td>
-        <td><%= link_to 'Destroy', politician, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @politicians.each do |p| %>
+        <tr>
+          <td><%= "#{p.first_name} #{p.last_name}" %></td>
+          <td><%= p.state %></td>
+          <td><%= p.party %></td>
+        </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Politician', new_politician_path %>

@@ -5,6 +5,16 @@
     <div class="page-content-wrapper">
       <div class="container-fluid">
 
+        <% if !flash.empty? %>
+            <div id="flash">
+              <% flash.keys.each do |k| %>
+                  <div class="alert alert-warning">
+                    <%= flash[k] %>
+                  </div>
+              <% end %>
+            </div>
+        <% end %>
+
         <%= yield %>
 
       </div>
@@ -12,12 +22,5 @@
 
     <%= render partial: 'layouts/footer' %>
 </div>
-
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
 
 <% parent_layout 'base' %>

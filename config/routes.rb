@@ -13,11 +13,16 @@ Rails.application.routes.draw do
 
   resources :leagues
 
+  devise_for :users
+
+  authenticated :user do
+    root to: 'users#show', as: 'authenticated_root'
+  end
+
+  root to: 'home#index'
+
   get 'users/:id', to: 'users#show', as: 'user_show'
 
-  devise_for :users
-  root 'home#index', as: 'landing_page'
-
-  get '/import/legislators', to: 'import#legislators'
+  get '/import/:method', to: 'import#sunlight'
 
 end

@@ -11,16 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115224301) do
+ActiveRecord::Schema.define(version: 20141116013208) do
 
   create_table "bills", force: true do |t|
-    t.integer  "bill_number"
+    t.string   "bill_number"
     t.string   "name"
     t.string   "committee"
-    t.boolean  "read_on_floor"
     t.boolean  "passed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "chamber"
+    t.integer  "cosponsors_count"
+    t.string   "enacted_as"
+    t.date     "introduced_on"
+    t.date     "last_action_at"
+    t.date     "last_vote_at"
+    t.integer  "number"
+    t.text     "official_title"
+    t.string   "sponsor_id"
   end
 
   create_table "leagues", force: true do |t|
@@ -48,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141115224301) do
     t.string   "last_name"
     t.string   "party"
     t.string   "state"
-    t.string   "biography"
+    t.text     "biography"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bioguide_id"
@@ -112,5 +120,18 @@ ActiveRecord::Schema.define(version: 20141115224301) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.string  "ammendment_number"
+    t.string  "bill_number"
+    t.string  "chamber"
+    t.integer "number"
+    t.string  "question"
+    t.string  "required"
+    t.string  "result"
+    t.string  "vote_type"
+    t.date    "voted_at"
+    t.string  "year"
+  end
 
 end
