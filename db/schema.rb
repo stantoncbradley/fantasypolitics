@@ -11,22 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115180752) do
+ActiveRecord::Schema.define(version: 20141115224301) do
 
   create_table "bills", force: true do |t|
-    t.integer  "sponsor"
     t.integer  "bill_number"
     t.string   "name"
     t.string   "committee"
     t.boolean  "read_on_floor"
     t.boolean  "passed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "cosponsors", force: true do |t|
-    t.integer  "politician_id"
-    t.integer  "bill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,6 +64,14 @@ ActiveRecord::Schema.define(version: 20141115180752) do
   create_table "rosters", force: true do |t|
     t.integer  "leagues_user_id"
     t.integer  "politician_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sponsors", force: true do |t|
+    t.integer  "politician_id"
+    t.integer  "bill_id"
+    t.boolean  "primary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
