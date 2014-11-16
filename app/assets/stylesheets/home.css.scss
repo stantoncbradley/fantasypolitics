@@ -20,13 +20,25 @@ body {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-}
 
-.text-vertical-center h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 4.5em;
-  font-weight: 700;
+  .panel {
+    margin-left: auto;
+    margin-right: auto;
+    background: none;
+    border-left: none;
+    border-right: none;
+
+    .panel-body {
+      background: rgba(46, 51, 56, 0.5)!important;
+    }
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 4.5em;
+      font-weight: 700;
+    }
+  }
 }
 
 /* Custom Button Styles */
@@ -34,14 +46,14 @@ body {
 .btn-dark {
   border-radius: 0;
   color: #fff;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.6);
 }
 
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
   color: #fff;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
 }
 
 .btn-light {
