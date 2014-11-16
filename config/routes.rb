@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :leagues
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations'}
 
   authenticated :user do
     root to: 'users#show', as: 'authenticated_root'

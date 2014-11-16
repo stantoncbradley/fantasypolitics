@@ -12,7 +12,7 @@
   <ul class="list-group scrolling-sponsor-list">
     <% if @politician.sponsors.any? %>
         <% @politician.sponsors.each do |sponsor| %>
-            <a href="#" class="list-group-item"><%= sponsor.bill.bill_number %></a>
+            <a href="<%= bill_path(sponsor.bill) %>" class="list-group-item"><%= sponsor.bill.bill_number.upcase %></a>
         <% end %>
     <% else %>
         <a href="#" class="list-group-item" style="text-align: center;">No bills to display</a>

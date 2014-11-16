@@ -14,7 +14,7 @@
   <tbody>
   <% @bills.all.to_a do |bill| %>
       <tr onclick="location.href='<%= bill_path(bill) %>'">
-        <td><%= bill.bill_number %></td>
+        <td><%= bill.bill_number.upcase %></td>
         <td><%= bill.official_title %></td>
         <td><%= bill.introduced_on %></td>
         <td><%= bill.passed ? 'Yes' : 'No' %></td>
