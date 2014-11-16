@@ -8,16 +8,10 @@ class RegistrationsController < Devise::RegistrationsController
 
             league = League.order('id desc').first
 
-            league_roster_ids = Roster.by_league(league.id).to_a.map { |lr| lr.politician_id }
-            politicians_available = Politician.where.not(id: league_roster_ids).order('points desc')
-
             if league.league_users.count > 12
-                if Rails.env.production?
-                    new_league_number = league.id == 1 ? 2 : (league.id - 1) / 10
-                else
-                    new_league_number = league.id + 1
-                end
+                new_league_number = league.id + 1
                 league = League.create!({
+                                            id: new_league_number.id,
                                             name: "Startup Weekend STL #{new_league_number}",
                                             active: true
                                         })
