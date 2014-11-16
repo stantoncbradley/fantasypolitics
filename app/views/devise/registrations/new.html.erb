@@ -2,10 +2,20 @@
   <h1>Sign up</h1>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<%= devise_error_messages! %>
+
 <div class="devise-form-fields">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-
         <div class="form-group">
             <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
         </div>
