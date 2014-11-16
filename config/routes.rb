@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     root to: 'users#show', as: 'authenticated_root'
   end
 
-  root to: 'home#index'g
+  root to: 'home#index'
+
+  get 'users/:id', to: 'users#show', as: 'user_show'
 
 end
