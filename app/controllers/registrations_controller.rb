@@ -9,14 +9,14 @@ class RegistrationsController < Devise::RegistrationsController
             league = League.order('id desc').first
 
             if league.league_users.count > 12
-                new_league_number = league.id + 1
+                new_league_number = League.all.count + 1
                 league = League.new({
                                             name: "Startup Weekend STL #{new_league_number}",
                                             active: true
                                         })
-                league.id = new_league_number
                 league.save!
             end
+
             league_user = LeagueUser.create!({
                                                  user_id: resource.id,
                                                  league_id: league.id,
