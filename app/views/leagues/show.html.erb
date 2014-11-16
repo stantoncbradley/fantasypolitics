@@ -5,18 +5,14 @@
 <table class="table table-responsive table-hoverable">
   <thead>
     <th>Name</th>
-    <th>Wins</th>
-    <th>Losses</th>
-    <th>Ties</th>
+    <th>Rank</th>
     <th>Points</th>
   </thead>
   <tbody>
-  <% @league.league_users.each do |lu| %>
+  <% @league.league_users.order('points desc').each_with_index do |lu, i| %>
       <tr onclick="location.href='<%= league_user_path(lu) %>'">
         <td><%= lu.team_name %></td>
-        <td><%= lu.wins %></td>
-        <td><%= lu.losses %></td>
-        <td><%= lu.ties %></td>
+        <td><%= i + 1 %></td>
         <td><%= lu.points %></td>
       </tr>
   <% end %>
