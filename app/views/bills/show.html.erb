@@ -1,1 +1,20 @@
 
+<div class="page-header">
+  <h1><%= @bill.bill_number.upcase %></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Sponsors</h3>
+  </div>
+
+  <ul class="list-group scrolling-sponsor-list">
+    <% if @bill.sponsors.any? %>
+        <% @bill.sponsors.each do |sponsor| %>
+            <a href="<%= politician_path(sponsor.politician) %>" class="list-group-item"><%= "#{sponsor.politician.first_name} #{sponsor.politician.last_name}" %></a>
+        <% end %>
+    <% else %>
+        <a href="#" class="list-group-item" style="text-align: center;">No sponsors to display</a>
+    <% end %>
+  </ul>
+</div>
