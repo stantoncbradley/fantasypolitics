@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116095513) do
+ActiveRecord::Schema.define(version: 20141116165420) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141116095513) do
     t.integer  "wins"
     t.integer  "losses"
     t.integer  "ties"
+    t.integer  "points"
     t.integer  "status"
     t.boolean  "is_moderator"
     t.datetime "created_at"
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 20141116095513) do
     t.string   "party"
     t.string   "state"
     t.text     "biography"
+    t.integer  "points"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "bioguide_id"
