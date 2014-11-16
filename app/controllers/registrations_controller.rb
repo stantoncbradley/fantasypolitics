@@ -21,20 +21,22 @@ class RegistrationsController < Devise::RegistrationsController
       new_team_members = []
 
       league_roster_ids = Roster.by_league(SWSTL_ID).to_a.map { |lr| lr.politician_id }
-      politicians_available = Politician.where.not(id: league_roster_ids).to_a
+      politicians_available = Politician.where.not(id: league_roster_ids).order('points desc')
 
-      politicians_available.sort! { |x,y| x.points <=> y.points }
+      # politicians_available.sort! { |x,y| x.points <=> y.points }
 
-      new_team_members.push(politicians_available.pop)
+      new_team_members.push(politicians_available.first)
       new_team_members.push(*politicians_available.sample(9))
 
       new_team_members.each do |politician|
         Roster.create!({
-            league_user: league_user,
-            politician: politician,
+            league_user_id: league_user.id,
+            politician_id: politician.id,
             league_id: SWSTL_ID
         })
       end
+      league_user.points = league_user.politicians.inject(0) { |sum,p| sum + p.points }
+      league_user.save!
     end
   end
 end
