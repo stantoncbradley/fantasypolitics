@@ -9,10 +9,10 @@
     <th>Points</th>
   </thead>
   <tbody>
-  <% @league.league_users.sort{|x,y| x.points <=> y.points }.each_with_index do |lu| %>
+  <% @league.league_users.sort{|x,y| x.points <=> y.points }.each_with_index do |lu, i| %>
       <tr onclick="location.href='<%= league_user_path(lu) %>'">
         <td><%= lu.team_name %></td>
-        <td><%= lu.rank %></td>
+        <td><%= i + 1 %></td>
         <td><%= lu.points %></td>
       </tr>
   <% end %>
