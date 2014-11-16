@@ -9,6 +9,7 @@ class Sunlight
   API_KEY         = '146a7f07a1104cdf8e298db177d42b22'
   REQUEST_TIMEOUT = 10 #seconds
   REQUEST_RETRIES = 2
+  PER_PAGE        = 50 #This is the max Sunlight allows
 
 
 
@@ -18,7 +19,7 @@ class Sunlight
   # @return JSON object with result
   #
   def self.call_api(request, page)
-    url = BASE_URL + request + "?apikey=" + API_KEY + "&page=" + page.to_s
+    url = BASE_URL + request + "?apikey=" + API_KEY + "$per_page=" + PER_PAGE + "&page=" + page.to_s
     uri = URI.parse(url)
 
     http = Net::HTTP.new uri.host, uri.port
