@@ -5,6 +5,6 @@ class Politician < ActiveRecord::Base
 
 
     def points
-
+        sponsors.count
     end
 end
