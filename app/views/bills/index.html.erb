@@ -12,7 +12,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @bills.each do |bill| %>
+  <% @bills.all.to_a do |bill| %>
       <tr onclick="location.href='<%= bill_path(bill) %>'">
         <td><%= bill.bill_number %></td>
         <td><%= bill.official_title %></td>
