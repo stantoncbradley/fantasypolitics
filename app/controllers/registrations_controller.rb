@@ -36,11 +36,11 @@ class RegistrationsController < Devise::RegistrationsController
             new_team_members = []
 
             league_roster_ids = Roster.by_league(league.id).to_a.map { |lr| lr.politician_id }
-            politicians_available = Politician.where.not(id: league_roster_ids).order('points desc')
+            politicians_available = Politician.where.not(id: league_roster_ids).order('points desc').to_a
 
             # politicians_available.sort! { |x,y| x.points <=> y.points }
 
-            new_team_members.push(politicians_available.first)
+            new_team_members.push(politicians_available.shift)
             new_team_members.push(*politicians_available.sample(9))
 
             new_team_members.each do |politician|
