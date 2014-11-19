@@ -3,16 +3,17 @@
 <!-- Header -->
 <header id="top" class="header">
   <div class="text-vertical-center">
-    <div class="panel panel-default">
-      <div class="panel-body">
-            <%= image_tag('logo_image.png', alt: 'fantasy politics') %>TM
-            <h1>Fantasy Politics</h1>
-            <h3>Join Congress.</h3>
-            <br>
+    <div class="brand">
+        <%= image_tag('logo_image.png', alt: 'fantasy politics') %> <span class="splash-trademark">TM</span>
+        <h1>Fantasy Politics</h1>
+        <h3>Join Congress.</h3>
+    </div>
+    <div class="splash-controls">
+        <div class="form-group">
             <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-dark btn-lg' %>
             <%= link_to 'Log in', new_user_session_path, class: 'btn btn-dark btn-lg' %>
         </div>
-      </div>
+    </div>
   </div>
 </header>
 
