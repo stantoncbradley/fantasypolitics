@@ -27,6 +27,8 @@ body {
     background: none;
     border-left: none;
     border-right: none;
+    border-top: none;
+    border-bottom: none;
 
     .panel-body {
       background: rgba(46, 51, 56, 0.5)!important;
@@ -85,7 +87,7 @@ hr.small {
   height: 100%;
   margin-right: -250px;
   overflow-y: auto;
-  background: #222;
+  background: #333;
   -webkit-transition: all 0.4s ease 0s;
   -moz-transition: all 0.4s ease 0s;
   -ms-transition: all 0.4s ease 0s;
@@ -168,7 +170,7 @@ hr.small {
   position: relative;
   width: 100%;
   height: 100%;
-  background: image_url('landing-bg.jpg') no-repeat center center scroll;
+  background: #333;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
