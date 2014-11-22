@@ -16,11 +16,12 @@ class RegistrationsController < Devise::RegistrationsController
                                         })
                 league.save!
             end
+            resource.email=~/@/
 
             league_user = LeagueUser.create!({
                                                  user_id: resource.id,
                                                  league_id: league.id,
-                                                 team_name: resource.email,
+                                                 team_name: $`,
                                                  wins: 0,
                                                  losses: 0,
                                                  ties: 0,
