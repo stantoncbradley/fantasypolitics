@@ -22,18 +22,18 @@
 <table class="table table-responsive table-hoverable">
   <thead>
   <tr>
+    <th>League</th>
     <th>Offered by</th>
-    <th>Accept</th>
-    <th>Reject</th>
+    <th>Status</th>
   </tr>
   </thead>
   <tbody>
   <% current_user.teams.each do |t| %>
     <% t.trades_offered.each do |to| %>
-      <tr>
+      <tr onclick="location.href='<%= trade_path(to) %>'">
+        <td><%= League.find(t.league_id).name %></td>
         <td><%= Team.find(to.from_team_id).team_name %></td>
-        <td>Accept</td>
-        <td>Reject</td>
+        <td><%= to.status %></td>
       </tr>
     <% end %>
   <% end %>
@@ -43,6 +43,7 @@
 <table class="table table-responsive table-hoverable">
   <thead>
   <tr>
+    <th>League</th>
     <th>Offered to</th>
     <th>Status</th>
   </tr>
@@ -50,9 +51,10 @@
   <tbody>
   <% current_user.teams.each do |t| %>
       <% t.trades_proposed.each do |tp| %>
-          <tr>
+          <tr onclick="location.href='<%= trade_path(tp) %>'">
+            <td><%= League.find(t.league_id).name %></td>
             <td><%= Team.find(tp.to_team_id).team_name %></td>
-            <td>Pending</td>
+            <td><%= tp.status %></td>
           </tr>
       <% end %>
   <% end %>

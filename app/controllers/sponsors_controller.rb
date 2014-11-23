@@ -1,5 +1,5 @@
 class SponsorsController < ApplicationController
-  before_action :set_cosponsor, only: [:show, :edit, :update, :destroy]
+  before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
@@ -37,11 +37,11 @@ class SponsorsController < ApplicationController
   end
 
   private
-    def set_cosponsor
+    def set_sponsor
       @sponsor = Sponsor.find(params[:id])
     end
 
-    def cosponsor_params
+    def sponsor_params
       params[:sponsor]
     end
 end

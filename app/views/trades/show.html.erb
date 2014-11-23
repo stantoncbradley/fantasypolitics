@@ -1,9 +1,10 @@
 <div class="page-header">
-  <h1>Trade Created!</h1>
+  <h1><%= "Trade #{@trade.id}" %></h1>
+  <h4><%= @trade.status %></h4>
 </div>
 
 <div>
-  <h3>Players you selected to acquire</h3>
+  <h3><%= "Politicians to acquire from #{@to_team.team_name}" %></h3>
 </div>
 <table class="table table-responsive table-hoverable">
   <thead>
@@ -29,7 +30,7 @@
 </table>
 
 <div>
-  <h3>Players you offered from your team</h3>
+  <h3><%= "Politicians offered by #{@from_team.team_name}" %></h3>
 </div>
 <table class="table table-responsive table-hoverable">
   <thead>
@@ -53,5 +54,14 @@
   <% end %>
   </tbody>
 </table>
+
+<% if @trade.status == 'Pending' %>
+    <% if current_user.id == @to_team.user_id %>
+        <%= link_to('Accept', edit_trade_path(@trade, status: 'Accepted'), class: 'btn btn-primary') %>
+        <%= link_to('Reject', edit_trade_path(@trade, status: 'Rejected'), class: 'btn btn-primary') %>
+    <% elsif current_user.id == @from_team.user_id %>
+        <%= link_to('Cancel Trade', edit_trade_path(@trade, status: 'Rejected'), class: 'btn btn-primary') %>
+    <% end %>
+<% end %>
 
 <%= link_to('Home', root_path(current_user), class: 'btn btn-primary') %>
