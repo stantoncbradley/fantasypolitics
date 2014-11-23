@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116165420) do
+ActiveRecord::Schema.define(version: 20141122234523) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -29,20 +29,6 @@ ActiveRecord::Schema.define(version: 20141116165420) do
     t.integer  "number"
     t.text     "official_title"
     t.string   "sponsor_id"
-  end
-
-  create_table "league_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "league_id"
-    t.string   "team_name"
-    t.integer  "wins"
-    t.integer  "losses"
-    t.integer  "ties"
-    t.integer  "points"
-    t.integer  "status"
-    t.boolean  "is_moderator"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "leagues", force: true do |t|
@@ -83,7 +69,7 @@ ActiveRecord::Schema.define(version: 20141116165420) do
   end
 
   create_table "rosters", force: true do |t|
-    t.integer  "league_user_id"
+    t.integer  "team_id"
     t.integer  "politician_id"
     t.integer  "league_id"
     t.datetime "created_at"
@@ -94,6 +80,20 @@ ActiveRecord::Schema.define(version: 20141116165420) do
     t.integer  "politician_id"
     t.integer  "bill_id"
     t.boolean  "primary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "league_id"
+    t.string   "team_name"
+    t.integer  "wins"
+    t.integer  "losses"
+    t.integer  "ties"
+    t.integer  "points"
+    t.integer  "status"
+    t.boolean  "is_moderator"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

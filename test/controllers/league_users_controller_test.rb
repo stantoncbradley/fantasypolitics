@@ -2,13 +2,13 @@ require 'test_helper'
 
 class LeagueUsersControllerTest < ActionController::TestCase
   setup do
-    @league_user = league_users(:one)
+    @teams = league_users(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:league_users)
+    assert_not_nil assigns(:Teams)
   end
 
   test "should get new" do
@@ -18,30 +18,30 @@ class LeagueUsersControllerTest < ActionController::TestCase
 
   test "should create league_user" do
     assert_difference('LeagueUser.count') do
-      post :create, league_user: {  }
+      post :create, Teams: {  }
     end
 
-    assert_redirected_to league_user_path(assigns(:league_user))
+    assert_redirected_to league_user_path(assigns(:Teams))
   end
 
   test "should show league_user" do
-    get :show, id: @league_user
+    get :show, id: @teams
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @league_user
+    get :edit, id: @teams
     assert_response :success
   end
 
   test "should update league_user" do
-    patch :update, id: @league_user, league_user: {  }
-    assert_redirected_to league_user_path(assigns(:league_user))
+    patch :update, id: @teams, Teams: {  }
+    assert_redirected_to league_user_path(assigns(:Teams))
   end
 
   test "should destroy league_user" do
     assert_difference('LeagueUser.count', -1) do
-      delete :destroy, id: @league_user
+      delete :destroy, id: @teams
     end
 
     assert_redirected_to league_users_path

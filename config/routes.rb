@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :rosters
 
-  resources :league_users
+  resources :teams
 
   resources :leagues
 

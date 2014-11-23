@@ -9,11 +9,11 @@
     <th>Points</th>
   </thead>
   <tbody>
-  <% @league.league_users.order('points desc').each_with_index do |lu, i| %>
-      <tr onclick="location.href='<%= league_user_path(lu) %>'">
-        <td><%= lu.team_name %></td>
+  <% @league.teams.order('points desc').each_with_index do |team, i| %>
+      <tr onclick="location.href='<%= team_path(team) %>'">
+        <td><%= team.team_name %></td>
         <td><%= i + 1 %></td>
-        <td><%= lu.points %></td>
+        <td><%= team.points %></td>
       </tr>
   <% end %>
   </tbody>
