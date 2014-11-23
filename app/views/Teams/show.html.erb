@@ -1,5 +1,10 @@
 <div class="page-header">
-  <h1><%= @teams.team_name %></h1>
+  <h1>
+    <%= @teams.team_name %>
+    <% if @teams.is_moderator %>
+        &nbsp;<a href="<%= edit_team_path(@teams) %>"><span class="glyphicon glypicon-cog"></span></a>
+    <% end %>
+  </h1>
 </div>
 
 <table class="table table-responsive table-hoverable">

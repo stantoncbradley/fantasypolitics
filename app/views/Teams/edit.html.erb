@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1><%= @teams.status == 1 ? 'Create' : 'Update' %> your team</h1>
+</div>
+
+<%= form_for @teams do |t| %>
+    <div class="form-group">
+      <%= t.text_field :team_name, placeholder: 'Team name', class: 'form-control' %>
+    </div>
+    <%= t.submit value: (@teams.status == 1 ? 'Create' : 'Update'), class: 'btn btn-success' %>
+<% end %>
