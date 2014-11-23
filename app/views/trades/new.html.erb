@@ -2,7 +2,7 @@
   <h1><%= "Create Trade with #{@to_team.team_name}" %></h1>
 </div>
 
-<% form_for @trade do |t| %>
+<%= form_tag({:action => 'create'}) do %>
     <div>
       <h2><%= "Select players from team #{@to_team.team_name} that you wish to acquire:" %></h2>
     </div>
@@ -18,17 +18,16 @@
       </tr>
       </thead>
       <tbody>
+      <%= hidden_field_tag 'to_team_id', @to_team.id %>
       <% @to_team.rosters.each do |r| %>
-        <% t.fields_for @trade.trade_rosters do |tr| %>
           <tr>
             <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
             <td><%= r.politician.party %></td>
             <td><%= state_name(r.politician.state) %></td>
             <td><%= r.politician.chamber.capitalize %></td>
             <td><%= r.politician.points %></td>
-            <td><%= tr.check_box('roster_id', checked_value = r.id) %></td>
+            <td><%= check_box_tag 'roster_ids[]', r.id %></td>
           </tr>
-        <% end %>
       <% end %>
       </tbody>
     </table>
@@ -48,6 +47,7 @@
       </tr>
       </thead>
       <tbody>
+      <%= hidden_field_tag 'from_team_id', @from_team.id %>
       <% @from_team.rosters.each do |r| %>
           <tr>
             <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
@@ -55,11 +55,10 @@
             <td><%= state_name(r.politician.state) %></td>
             <td><%= r.politician.chamber.capitalize %></td>
             <td><%= r.politician.points %></td>
-            <td><%= check_box(t.trade_rosters.roster_id, r.id) %></td>
+            <td><%= check_box_tag 'roster_ids[]', r.id %></td>
           </tr>
       <% end %>
       </tbody>
     </table>
+    <%= button_to "Create", :action => "create" %>
 <% end %>
-
-<%= button_to "Create", :action => "create", :remote => true, :form => { "data-type" => "json" } %>

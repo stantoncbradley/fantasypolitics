@@ -11,7 +11,9 @@ class TradesController < ApplicationController
     end
 
     def create
-        @trade = Trade.new
+        @trade = Trade.create({
+
+                              })
         @trade.build_team
         respond_with(@trade)
     end
