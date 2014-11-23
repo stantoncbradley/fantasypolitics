@@ -33,7 +33,7 @@
     </table>
 
     <div>
-      <h2><%= 'Select players from your team to offer:' %></h2>
+      <h2>Select players from your team to offer:</h2>
     </div>
     <table class="table table-responsive table-hoverable">
       <thead>
@@ -60,5 +60,5 @@
       <% end %>
       </tbody>
     </table>
-    <%= button_to "Create", :action => "create" %>
+    <%= submit_tag('Propose Trade', class: 'btn btn-primary')  %>
 <% end %>

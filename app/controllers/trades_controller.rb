@@ -11,10 +11,17 @@ class TradesController < ApplicationController
     end
 
     def create
-        @trade = Trade.create({
-
+        @trade = Trade.create!({
+                                  to_team_id: params[:to_team_id],
+                                  from_team_id: params[:from_team_id],
+                                  status: 1
                               })
-        @trade.build_team
+        params[:roster_ids].each do |r|
+            TradeRoster.create!({
+                                    trade_id: @trade.id,
+                                    roster_id: r
+                                })
+        end
         respond_with(@trade)
     end
 end

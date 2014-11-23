@@ -1,3 +1,57 @@
 <div class="page-header">
   <h1>Trade Created!</h1>
 </div>
+
+<div>
+  <h2>Players you selected to acquire</h2>
+</div>
+<table class="table table-responsive table-hoverable">
+  <thead>
+  <tr>
+    <th>Politician</th>
+    <th>Party</th>
+    <th>State</th>
+    <th>Chamber</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @trade.rosters.where(team_id: @trade.to_team_id).each do |r| %>
+      <tr>
+        <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+        <td><%= r.politician.party %></td>
+        <td><%= state_name(r.politician.state) %></td>
+        <td><%= r.politician.chamber.capitalize %></td>
+        <td><%= r.politician.points %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div>
+  <h2>Players you offered from your team</h2>
+</div>
+<table class="table table-responsive table-hoverable">
+  <thead>
+  <tr>
+    <th>Politician</th>
+    <th>Party</th>
+    <th>State</th>
+    <th>Chamber</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @trade.rosters.where(team_id: @trade.from_team_id).each do |r| %>
+      <tr>
+        <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+        <td><%= r.politician.party %></td>
+        <td><%= state_name(r.politician.state) %></td>
+        <td><%= r.politician.chamber.capitalize %></td>
+        <td><%= r.politician.points %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to('Home', root_path(current_user), class: 'btn btn-primary') %>
