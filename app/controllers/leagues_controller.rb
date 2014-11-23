@@ -22,7 +22,7 @@ class LeaguesController < ApplicationController
     @league = League.new(league_params)
     @league.save!
 
-    LeagueUser.create!({
+    Team.create!({
          user_id: current_user.id,
          league_id: @league.id,
          status: 1,

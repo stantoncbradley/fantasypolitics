@@ -24,8 +24,10 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  get 'users/fb-test', to: 'users#fb_test', as: 'user_fb_test'
   get 'users/:id', to: 'users#show', as: 'user_show'
 
   get '/import/:method', to: 'import#sunlight'
+
 
 end
