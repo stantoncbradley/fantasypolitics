@@ -1,7 +1,8 @@
 <div class="page-header">
-    <h1><span class="glyphicon glyphicon-home"></span> My Leagues</h1>
+    <h1><span class="glyphicon glyphicon-home"></span> Home</h1>
 </div>
 
+<h3>My Leagues</h3>
 <table class="table table-responsive table-hoverable">
   <thead>
     <tr>
@@ -16,3 +17,46 @@
       <%  end %>
   </tbody>
 </table>
+
+<h3>My Trades</h3>
+<table class="table table-responsive table-hoverable">
+  <thead>
+  <tr>
+    <th>Offered by</th>
+    <th>Accept</th>
+    <th>Reject</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% current_user.teams.each do |t| %>
+    <% t.trades_offered.each do |to| %>
+      <tr>
+        <td><%= Team.find(to.from_team_id).team_name %></td>
+        <td>Accept</td>
+        <td>Reject</td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<table class="table table-responsive table-hoverable">
+  <thead>
+  <tr>
+    <th>Offered to</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% current_user.teams.each do |t| %>
+      <% t.trades_proposed.each do |tp| %>
+          <tr>
+            <td><%= Team.find(tp.to_team_id).team_name %></td>
+            <td>Pending</td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+

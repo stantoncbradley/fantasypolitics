@@ -16,6 +16,7 @@ class TradesController < ApplicationController
                                   from_team_id: params[:from_team_id],
                                   status: 1
                               })
+        raise 'Must select at least one player to trade' unless params[:roster_ids]
         params[:roster_ids].each do |r|
             TradeRoster.create!({
                                     trade_id: @trade.id,
