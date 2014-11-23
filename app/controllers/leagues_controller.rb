@@ -1,5 +1,4 @@
 class LeaguesController < ApplicationController
-  before_action :set_league, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
@@ -9,6 +8,7 @@ class LeaguesController < ApplicationController
   end
 
   def show
+    @league = League.find(params[:id])
     respond_with(@league)
   end
 
@@ -17,31 +17,23 @@ class LeaguesController < ApplicationController
     respond_with(@league)
   end
 
-  def edit
-  end
 
   def create
     @league = League.new(league_params)
-    @league.save
-    respond_with(@league)
-  end
+    @league.save!
 
-  def update
-    @league.update(league_params)
-    respond_with(@league)
-  end
-
-  def destroy
-    @league.destroy
+    LeagueUser.create!({
+         user_id: current_user.id,
+         league_id: @league.id,
+         status: 1,
+         is_moderator: true
+     })
     respond_with(@league)
   end
 
   private
-    def set_league
-      @league = League.find(params[:id])
+    def league_params
+        params.require(:league).permit(:name)
     end
 
-    def league_params
-      params[:league]
-    end
 end

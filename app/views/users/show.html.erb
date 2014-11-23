@@ -9,10 +9,20 @@
     </tr>
   </thead>
   <tbody>
-    <% @leagues.each do |l| %>
-        <tr onclick="location.href='<%= league_path(l) %>'">
-          <td><%= l.name %></td>
-        </tr>
+    <% @eligible_leagues.each do |eligible_league| %>
+        <% if eligible_league[:status] == 1 %>
+          <tr onclick="">
+            <td>(INVITE) <%= eligible_league[:league].name %></td>
+          </tr>
+        <% else %>
+          <tr onclick="location.href='<%= league_path(eligible_league[:league]) %>'">
+            <td><%= eligible_league[:league].name %></td>
+          </tr>
+        <% end %>
       <%  end %>
   </tbody>
 </table>
+
+<%= link_to new_league_path, class: 'btn btn-success' do %>
+    <span class="glyphicon glyphicon-plus"></span> Create a league
+<% end %>

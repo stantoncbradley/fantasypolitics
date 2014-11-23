@@ -11,7 +11,10 @@ Rails.application.routes.draw do
 
   resources :league_users
 
-  resources :leagues
+  get 'leagues/new', to: 'leagues#new', as: 'new_league'
+  get 'leagues', to: 'leagues#index', as: 'leagues'
+  get 'leagues/:id', to: 'leagues#show', as: 'league'
+  post 'leagues', to: 'leagues#create', as: 'create_league'
 
   devise_for :users, controllers: { registrations: 'registrations'}
 
