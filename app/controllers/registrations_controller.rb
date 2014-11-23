@@ -1,14 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
-    after_filter :create_roster_and_league_user
+    after_filter :create_roster_and_team
 
     protected
 
-    def create_roster_and_league_user
+    def create_roster_and_team
         if resource.persisted?
 
             league = League.order('id desc').first
 
-            if league.league_users.count >= 12
+            if league.teams.count >= 12
                 new_league_number = League.all.count + 1
                 league = League.new({
                                             name: "Startup Weekend STL #{new_league_number}",
@@ -16,11 +16,12 @@ class RegistrationsController < Devise::RegistrationsController
                                         })
                 league.save!
             end
+            resource.email=~/@/
 
-            league_user = LeagueUser.create!({
+            team = Team.create!({
                                                  user_id: resource.id,
                                                  league_id: league.id,
-                                                 team_name: resource.email,
+                                                 team_name: $`,
                                                  wins: 0,
                                                  losses: 0,
                                                  ties: 0,
@@ -40,13 +41,13 @@ class RegistrationsController < Devise::RegistrationsController
 
             new_team_members.each do |politician|
                 Roster.create!({
-                                   league_user_id: league_user.id,
+                                   team_id: team.id,
                                    politician_id: politician.id,
                                    league_id: league.id
                                })
             end
-            league_user.points = league_user.politicians.inject(0) { |sum, p| sum + p.points }
-            league_user.save!
+            team.points = team.politicians.inject(0) { |sum, p| sum + p.points }
+            team.save!
         end
     end
 end

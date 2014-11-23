@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :rosters
 
-  resources :league_users
+  resources :teams
 
   get 'leagues/new', to: 'leagues#new', as: 'new_league'
   get 'leagues', to: 'leagues#index', as: 'leagues'

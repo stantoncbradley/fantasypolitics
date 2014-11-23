@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1><%= @league_user.team_name %></h1>
+  <h1><%= @teams.team_name %></h1>
 </div>
 
 <table class="table table-responsive table-hoverable">
@@ -13,7 +13,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @league_user.politicians.order('points desc').each do |p| %>
+  <% @teams.politicians.order('points desc').each do |p| %>
       <tr onclick="location.href='<%= politician_path(p) %>'">
         <td><%= "#{p.first_name} #{p.last_name}" %></td>
         <td><%= p.party %></td>

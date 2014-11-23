@@ -7,8 +7,8 @@ class AddPointsToPoliticianAndLeagueUser < ActiveRecord::Migration
       end
 
       add_column :league_users, :points, :integer, after: :ties
-      LeagueUser.reset_column_information
-      LeagueUser.all.each do |l|
+      Team.reset_column_information
+      Team.all.each do |l|
           l.points = l.politicians.inject(0) { |sum,p| sum + p.points }
       end
   end
