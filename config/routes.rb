@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :teams
 
   get 'leagues/new', to: 'leagues#new', as: 'new_league'
+  get 'leagues/:id/edit', to: 'leagues#edit', as: 'edit_league'
+  put 'leagues/:id', to: 'leagues#update', as: 'update_league'
   get 'leagues', to: 'leagues#index', as: 'leagues'
   get 'leagues/:id', to: 'leagues#show', as: 'league'
   post 'leagues', to: 'leagues#create', as: 'create_league'
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get 'users/fb-test', to: 'users#fb_test', as: 'user_fb_test'
   get 'users/:id', to: 'users#show', as: 'user_show'
 
   get '/import/:method', to: 'import#sunlight'

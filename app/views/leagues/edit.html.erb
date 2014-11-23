@@ -1,0 +1,25 @@
+<%= javascript_include_tag 'leagues/fb-invites' %>
+
+<%= form_for @league do |l| %>
+    <div class="form-group">
+      <%= l.text_field :name, autofocus: true, placeholder: 'League name', class: 'form-control' %>
+    </div>
+    <%= l.submit 'Save', class: 'btn btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Invite friends via Facebook</h3>
+    </div>
+
+    <div id="fb-mfs">
+        <ul id="mfsList" class="list-group scrolling-sponsor-list">
+          <a href="#" class="list-group-item" style="text-align: center;">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+
+            <span id="status"></span>
+          </a>
+        </ul>
+    </div>
+</div>

@@ -9,7 +9,14 @@ class LeaguesController < ApplicationController
 
   def show
     @league = League.find(params[:id])
-    respond_with(@league)
+    @team = Team.all.by_league(params[:id]).by_user(current_user.id).first
+    respond_with @league, @team
+  end
+
+  def edit
+    @league = League.find(params[:id])
+    @team = Team.all.by_league(params[:id]).by_user(current_user.id).first
+    respond_with @league, @team
   end
 
   def new
@@ -29,6 +36,17 @@ class LeaguesController < ApplicationController
          is_moderator: true
      })
     respond_with(@league)
+  end
+
+  def update
+    # What params can they edit?
+    # Name
+    # Users in the league (teams)
+
+    league_name = league_params[:name]
+
+
+
   end
 
   private
