@@ -8,7 +8,7 @@ class LeagueUsersControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:Teams)
+    assert_not_nil assigns(:teams)
   end
 
   test "should get new" do
@@ -18,10 +18,10 @@ class LeagueUsersControllerTest < ActionController::TestCase
 
   test "should create league_user" do
     assert_difference('LeagueUser.count') do
-      post :create, Teams: {  }
+      post :create, teams: {  }
     end
 
-    assert_redirected_to league_user_path(assigns(:Teams))
+    assert_redirected_to league_user_path(assigns(:teams))
   end
 
   test "should show league_user" do
@@ -35,8 +35,8 @@ class LeagueUsersControllerTest < ActionController::TestCase
   end
 
   test "should update league_user" do
-    patch :update, id: @teams, Teams: {  }
-    assert_redirected_to league_user_path(assigns(:Teams))
+    patch :update, id: @teams, teams: {  }
+    assert_redirected_to league_user_path(assigns(:teams))
   end
 
   test "should destroy league_user" do

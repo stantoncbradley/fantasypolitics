@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122234523) do
+ActiveRecord::Schema.define(version: 20141123001615) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 20141122234523) do
     t.boolean  "is_moderator"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "trade_rosters", force: true do |t|
+    t.integer "trade_id"
+    t.integer "roster_id"
+  end
+
+  create_table "trades", force: true do |t|
+    t.integer "to_team_id"
+    t.integer "from_team_id"
+    t.integer "status"
   end
 
   create_table "users", force: true do |t|

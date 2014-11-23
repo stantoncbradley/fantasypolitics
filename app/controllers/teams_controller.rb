@@ -9,36 +9,36 @@ class TeamsController < ApplicationController
   end
 
   def show
-    respond_with(@teams)
+    respond_with(@team)
   end
 
   def new
-    @teams = Team.new
-    respond_with(@teams)
+    @team = Team.new
+    respond_with(@team)
   end
 
   def edit
   end
 
   def create
-    @teams = Team.new(team_params)
-    @teams.save
-    respond_with(@teams)
+    @team = Team.new(team_params)
+    @team.save
+    respond_with(@team)
   end
 
   def update
-    @teams.update(team_params)
-    respond_with(@teams)
+    @team.update(team_params)
+    respond_with(@team)
   end
 
   def destroy
-    @teams.destroy
-    respond_with(@teams)
+    @team.destroy
+    respond_with(@team)
   end
 
   private
     def set_team
-      @teams = Team.find(params[:id])
+      @team = Team.find(params[:id])
     end
 
     def team_params

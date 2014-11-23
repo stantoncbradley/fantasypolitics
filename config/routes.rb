@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :leagues
 
+  resources :trades
+
   devise_for :users, controllers: { registrations: 'registrations'}
 
   authenticated :user do
