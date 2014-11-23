@@ -9,7 +9,7 @@
         // for FB.getLoginStatus().
         if (response.status === 'connected') {
             // Logged into your app and Facebook.
-            testAPI();
+            renderMFS();
         } else if (response.status === 'not_authorized') {
             // The person is logged into Facebook, but not your app.
             document.getElementById('status').innerHTML = 'Please log ' +
@@ -68,14 +68,31 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
+
+    function renderMFS() {
+        // First get the list of friends for this user with the Graph API
+        FB.api('/me/friends', function(response) {
+            var container = document.getElementById('fb-mfs');
+            var mfsForm = document.createElement('form');
+            mfsForm.id = 'mfsForm';
+
+            // Iterate through the array of friends object and create a checkbox for each one.
+            for(var i = 0; i < Math.min(response.data.length, 10); i++) {
+                var friendItem = document.createElement('div');
+                friendItem.id = 'friend_' + response.data[i].id;
+                friendItem.innerHTML = '<input type="checkbox" name="friends" value="'
+                + response.data[i].id
+                + '" />' + response.data[i].name;
+                mfsForm.appendChild(friendItem);
+            }
+            container.appendChild(mfsForm);
+
+            // Create a button to send the Request(s)
+            var sendButton = document.createElement('input');
+            sendButton.type = 'button';
+            sendButton.value = 'Send Request';
+            sendButton.onclick = sendRequest;
+            mfsForm.appendChild(sendButton);
         });
     }
 </script>
@@ -86,8 +103,13 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+<div id="fb-login-btn">
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
 
-<div id="status">
+    <div id="status">
+    </div>
+</div>
+
+<div id="fb-mfs">
 </div>
