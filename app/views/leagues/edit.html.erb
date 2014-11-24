@@ -55,7 +55,10 @@
             var newInvitePath = "/invites/new/" + String(leagueId);
 
             $.getJSON(newInvitePath, function(data) {
-                var sessionKey = data.invite[0].session_key;
+                var sessionKey = data.invite[0].session_key,
+                    fbLinkPath = [workingUrl, '/invites/', sessionKey].join('');
+
+                debugger;
 
                 var handleFbSendResponse = function(response) {
                         console.log(response, data);
@@ -63,7 +66,7 @@
 
                 FB.ui({
                     method: 'send',
-                    link: [workingUrl, '/invites/', sessionKey].join('')
+                    link: fbLinkPath
                 }, handleFbSendResponse);
             });
 
