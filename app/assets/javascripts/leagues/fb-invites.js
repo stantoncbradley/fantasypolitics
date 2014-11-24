@@ -1,7 +1,17 @@
 (function(league_id) {
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
-            renderLeagueInvite(league_id);
+            var container = document.getElementById('mfsBtn'),
+                inviteBtn = document.createElement('a'),
+                inviteCallback = function() { renderLeagueInvite(league_id); };
+            inviteBtn.href = '#';
+            inviteBtn.classList.add('btn');
+            inviteBtn.classList.add('btn-success');
+            inviteBtn.innerHTML = 'Send Invite(s)';
+            inviteBtn.onclick = inviteCallback;
+
+            container.innerHTML = '';
+            container.appendChild(inviteBtn);
         }
     }
 
