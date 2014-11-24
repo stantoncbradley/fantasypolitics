@@ -52,7 +52,7 @@
 
 
         function renderLeagueInvite() {
-            $.getJSON( "/ginvites/new", { invites: { league_id: leagueId } }, function(data) {
+            $.getJSON( "/invites/new", { invites: { league_id: leagueId } }, function(data) {
                 debugger;
 
                 var handleFbSendResponse = function(response) {
