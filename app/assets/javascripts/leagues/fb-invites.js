@@ -1,4 +1,4 @@
-(function(){
+
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
             renderMFS();
@@ -93,4 +93,3 @@
             console.log(response);
         }
     }
-}());
