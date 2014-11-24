@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122234523) do
+ActiveRecord::Schema.define(version: 20141124000039) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141122234523) do
 
   create_table "leagues", force: true do |t|
     t.string   "name"
+    t.integer  "status"
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"

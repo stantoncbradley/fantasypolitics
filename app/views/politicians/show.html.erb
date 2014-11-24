@@ -5,6 +5,16 @@
   <% end %>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Sponsored bills</h3>

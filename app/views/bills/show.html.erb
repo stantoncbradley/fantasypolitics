@@ -3,6 +3,16 @@
   <h1><%= @bill.bill_number.upcase %></h1>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Sponsors</h3>

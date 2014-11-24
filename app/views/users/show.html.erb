@@ -2,6 +2,16 @@
     <h1><span class="glyphicon glyphicon-home"></span> My Leagues</h1>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
 <table class="table table-responsive table-hoverable">
   <thead>
     <tr>
@@ -11,7 +21,7 @@
   <tbody>
     <% @eligible_leagues.each do |eligible_league| %>
         <% if eligible_league[:team].status == 1 %>
-          <tr onclick="location.href='<%= edit_team_path(eligible_league[:team]) %>">
+          <tr onclick="location.href='<%= edit_team_path(eligible_league[:team]) %>'">
             <td>(INVITE) <%= eligible_league[:league].name %></td>
           </tr>
         <% else %>

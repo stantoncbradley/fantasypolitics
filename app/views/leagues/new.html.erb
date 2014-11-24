@@ -1,12 +1,22 @@
 <div class="page-header">
-  <h1>Create a League</h1>
+  <h1>Create a league</h1>
 </div>
+
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
 
 <%= form_for @league do |l| %>
 
     <div class="form-group">
-        <%= l.label :name, 'Name of League:' %>
-        <%= l.text_field :name, placeholder: 'League Name' %>
+        <%= l.label :name, 'Name:' %>
+        <%= l.text_field :name, placeholder: 'League Name', class: 'form-control' %>
     </div>
 
     <%= l.submit 'Create', class: 'btn btn-success' %>

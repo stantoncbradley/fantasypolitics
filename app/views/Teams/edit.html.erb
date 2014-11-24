@@ -1,9 +1,20 @@
 <div class="page-header">
-  <h1><%= @teams.status == 1 ? 'Create' : 'Update' %> your team</h1>
+  <h1><%= @teams.status == 1 ? 'Create' : 'Update' %> your team <small>(<%= @teams.league.name %>)</small></h1>
 </div>
+
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
 
 <%= form_for @teams do |t| %>
     <div class="form-group">
+      <%= t.label :team_name, 'Name:' %>
       <%= t.text_field :team_name, placeholder: 'Team name', class: 'form-control' %>
     </div>
     <%= t.submit value: (@teams.status == 1 ? 'Create' : 'Update'), class: 'btn btn-success' %>

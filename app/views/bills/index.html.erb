@@ -2,6 +2,16 @@
   <h1><span class="glyphicon glyphicon-file"></span> Bills</h1>
 </div>
 
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
 <table class="table table-responsive table-hoverable">
   <thead>
   <tr>

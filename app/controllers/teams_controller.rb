@@ -19,10 +19,11 @@ class TeamsController < ApplicationController
 
   def update
     @teams = Team.find(params[:id])
-    if team_params[:name].to_s.strip.empty?
+    if team_params[:team_name].to_s.strip.empty?
       flash[:alert] = 'Please provide a team name'
-      redirect_to :edit
+      render :edit
     else
+      TeamSelectorService.execute(@teams, @teams.league_id) if @teams.status == 1
       @teams.update(team_params.merge(status: 2))
       respond_with(@teams)
     end
