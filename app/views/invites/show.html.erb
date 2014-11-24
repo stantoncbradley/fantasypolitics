@@ -7,7 +7,7 @@
 </div>
 
 <% if @teams.nil? %>
-    <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %>
+    <p>You must <%= link_to 'sign in with Facebook', user_omniauth_authorize_path(:facebook) %> before you can join this league.</p>
 <% else %>
     <%= render partial: 'teams/edit_form', locals: { teams: @teams } %>
 <% end %>
