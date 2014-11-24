@@ -1,7 +1,10 @@
 <div class="page-header">
   <h1>
-    <%= @teams.status == 1 ? 'Create' : 'Update' %> your team
-    &nbsp;
+    <% if @teams.status == 1 %>
+        <span class="glyphicon glyphicon-plus"></span> Create
+    <% else %>
+        <span class="glyphicon glyphicon-cog"></span> Manage
+    <% end %> your team
     <small>
       <% if @teams.status == 1 %>
           (<%= @teams.league.name %>)

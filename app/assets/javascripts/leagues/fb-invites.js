@@ -38,7 +38,6 @@
     }(document, 'script', 'facebook-jssdk'));
 
     function renderMFS() {
-        // First get the list of friends for this user with the Graph API
         FB.api('/me/friends', function(response) {
             debugger;
             var mfsList = document.getElementById('mfsList'),
