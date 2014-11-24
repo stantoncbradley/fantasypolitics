@@ -55,17 +55,14 @@
 
     function renderLogin() {
         var mfsList = document.getElementById('mfsList'),
-            fbLoginItem = document.createElement('a'),
-            fbLoginBtn = document.createElement('fb:login-button');
+            fbLoginItem = document.createElement('a');
 
         fbLoginItem.href = '#';
         fbLoginItem.classList.add('list-group-item');
         fbLoginItem.style.textAlign = 'center';
 
-        fbLoginBtn.scope = 'public_profile,email,user_friends';
-        fbLoginBtn.onlogin = checkLoginState;
-
-        fbLoginItem.appendChild(fbLoginBtn);
+        fbLoginItem.innerHTML = '<fb:login-button scope="public_profile,email,user_friends" ' +
+        'onlogin="checkLoginState();"></fb:login-button>';g
 
         mfsList.innerHTML = '';
         mfsList.appendChild(fbLoginItem);
