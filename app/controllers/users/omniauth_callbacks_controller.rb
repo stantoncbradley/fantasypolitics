@@ -7,8 +7,25 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => 'Facebook') if is_navigational_format?
     else
-      session['devise.facebook_data'] = request.env['omniauth.auth']
-      redirect_to new_user_registration_url
+      @user = User.by_email(request.env['omniauth.auth'].info.email).first
+
+      unless @user.nil?
+        @user.password = Devise.friendly_token[0,20]
+        @user.provider = request.env['omniauth.auth'].provider
+        @user.uid = request.env['omniauth.auth'].uid
+        @user.save!
+      else
+        @user = User.create!({
+                                 email: request.env['omniauth.auth'].info.email,
+                                 password: Devise.friendly_token[0,20],
+                                 provider: request.env['omniauth.auth'].provider,
+                                 uid: request.env['omniauth.auth'].uid
+                             })
+        CreateDemoTeamService.execute(@user)
+      end
+
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => 'Facebook') if is_navigational_format?
     end
   end
 end

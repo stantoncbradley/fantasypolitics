@@ -8,21 +8,10 @@ class User < ActiveRecord::Base
     has_many :teams
     has_many :leagues, through: :teams
 
+    scope :by_email, ->(email){ where(email: email) }
+
   def self.from_omniauth(auth)
-    user = where(provider: auth.provider, uid: auth.uid).first
-
-    if user.nil?
-      user = User.create!({
-        email: auth.info.email,
-        password: Devise.friendly_token[0,20],
-        provider: auth.provider,
-        uid: auth.uid
-      })
-
-      CreateDemoTeamService.execute(user)
-    end
-
-    user
+    where(provider: auth.provider, uid: auth.uid).first
   end
 
   def self.new_with_session(params, session)
