@@ -30,9 +30,9 @@ Rails.application.routes.draw do
 
   get '/import/:method', to: 'import#sunlight'
 
-  get 'invites/new', to: 'invites#new', as: 'new_invite'
+  get 'invites/new/:league_id', to: 'invites#new', as: 'new_invite'
   post 'invites', to: 'invites#create', as: 'create_invite'
-  get 'invites/:invite_id', to: 'invites#show', as: 'invite'
+  get 'invites/:session_key', to: 'invites#show', as: 'invite'
 
 
 end

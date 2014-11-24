@@ -9,5 +9,8 @@ class ApplicationController < ActionController::Base
     params[:working_url] ||= request.base_url
   end
 
-  #before_filter :authenticate_user!
+  def render_404
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
+
 end
