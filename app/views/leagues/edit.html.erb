@@ -52,15 +52,20 @@
 
 
         function renderLeagueInvite() {
-            debugger;
-            FB.ui({
-                method: 'send',
-                link: [workingUrl, '/invites/', String(leagueId)].join('')
-            }, sendResponse);
+            $.getJSON( "invites/new", { invites: { league_id: leagueId } }, function(data) {
+                debugger;
 
-            function sendResponse(response) {
-                console.log(response);
-            }
+                var handleFbSendResponse = function(response) {
+                    console.log(response, data);
+                };
+
+                FB.ui({
+                    method: 'send',
+                    link: [workingUrl, '/invites/', String(leagueId)].join('')
+                }, handleFbSendResponse);
+            });
+
+
         }
 
     }('<%= params[:working_url] %>', <%= @league.id %>));

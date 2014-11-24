@@ -1,24 +1,30 @@
-class InvitesContrller < ApplicationController
+class InvitesController < ApplicationController
 
-  before_filter :authenticate_user!, only: :create
-  before_filter :authenticate_league, only: :create
+  before_filter :authenticate_user!, only: [:new, :create]
+  before_filter :authenticate_league, only: [:new, :create]
 
   def show
     @invite = Invite.find(params[:id])
     render :show
   end
 
-  def create
+  def new
       invite = Invite.create!({
            id: SecureRandom.uuid,
            league_id: invite_params[:league_id]
       })
-    render json: { invite: [{ id: invite[:id], league_id: invite[:league_id] }] }
+    render json: { invite: [invite.attributes] }
+  end
+
+  def create
+    invite = Invite.find(invite_params[:id])
+    invite.active = true
+    invite.save!
   end
 
   private
     def invite_params
-      params.require(:invite).permit(:league_id)
+      params.require(:invite).permit(:league_id, :id)
     end
 
     def authenticate_league
