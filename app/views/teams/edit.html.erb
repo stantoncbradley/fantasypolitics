@@ -1,5 +1,15 @@
 <div class="page-header">
-  <h1><%= @teams.status == 1 ? 'Create' : 'Update' %> your team <small>(<%= @teams.league.name %>)</small></h1>
+  <h1>
+    <%= @teams.status == 1 ? 'Create' : 'Update' %> your team
+    &nbsp;
+    <small>
+      <% if @teams.status == 1 %>
+          (<%= @teams.league.name %>)
+      <% else %>
+        <a href="<%= league_path(@teams.league) %>">(<%= @teams.league.name %>)</a>
+      <% end %>
+    </small>
+  </h1>
 </div>
 
 <% if !flash.empty? %>

@@ -71,11 +71,10 @@ window.fbAsyncInit = function() {
 function renderMFS() {
     // First get the list of friends for this user with the Graph API
     FB.api('/me/friends', function(response) {
-        var container = document.getElementById('fb-mfs');
-        var mfsList = document.createElement('ul');
-        var mfsForm = document.createElement('form');
-        mfsList.id = 'mfsList';
-        mfsList.class = 'list-group scolling-sponsor-list';
+        var container = document.getElementById('fb-mfs'),
+            mfsList = document.getElementById('mfsList'),
+            mfsForm = document.createElement('form');
+
         mfsForm.id = 'mfsForm';
 
         // Iterate through the array of friends object and create a checkbox for each one.
@@ -89,8 +88,7 @@ function renderMFS() {
             + '" />' + response.data[i].name;
             mfsForm.appendChild(friendItem);
         }
-        container.innerHTML = '';
-        container.appendChild(mfsList);
+        mfsList.innerHTML = '';
         mfsList.appendChild(mfsForm);
 
         // Create a button to send the Request(s)
@@ -99,7 +97,7 @@ function renderMFS() {
         sendButton.class = 'btn btn-success';
         sendButton.value = 'Send Request(s)';
         sendButton.onclick = sendRequest;
-        mfsForm.appendChild(sendButton);
+        container.appendChild(sendButton);
     });
 
     function sendRequest() {
