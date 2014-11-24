@@ -53,7 +53,7 @@
     function renderLeagueInvite() {
         FB.ui({
             method: 'send',
-            link: 'http://www.fantasy-politics.co/invites/' + String(window.LEAGUE_ID)
+            link: [window.WORKING_URL, '/invites/', String(window.LEAGUE_ID)].join('')
         }, sendResponse);
 
         function sendResponse(response) {
