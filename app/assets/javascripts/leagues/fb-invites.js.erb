@@ -1,4 +1,4 @@
-(function() {
+(function(workingUrl, leagueId) {
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
             var container = document.getElementById('mfsBtn'),
@@ -51,9 +51,10 @@
 
 
     function renderLeagueInvite() {
+        debugger;
         FB.ui({
             method: 'send',
-            link: [window.WORKING_URL, '/invites/', String(window.LEAGUE_ID)].join('')
+            link: [workingUrl, '/invites/', String(leagueId)].join('')
         }, sendResponse);
 
         function sendResponse(response) {
@@ -61,4 +62,4 @@
         }
     }
 
-}());
+}(<%= params[:working_url] %>, <%= @league.id %>));
