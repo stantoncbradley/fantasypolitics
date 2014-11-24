@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  window.INVITES = {
+      workingUrl: <%= params[:working_url] %>,
+      leagueId: <%= @league.id %>
+  };
+</script>
+
 <%= javascript_include_tag 'leagues/fb-invites' %>
 
 <div class="page-header">

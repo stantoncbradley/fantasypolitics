@@ -62,4 +62,4 @@
         }
     }
 
-}(<%= params[:working_url] %>, <%= @league.id %>));
+}(window.INVITES.workingUrl, window.INVITES.leagueId));
