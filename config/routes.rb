@@ -30,5 +30,7 @@ Rails.application.routes.draw do
 
   get '/import/:method', to: 'import#sunlight'
 
+  get '/invites/:invite_id', to: 'invites#show', as: 'invite_show'
+
 
 end

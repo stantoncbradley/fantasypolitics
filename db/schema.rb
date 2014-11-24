@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124000039) do
+ActiveRecord::Schema.define(version: 20141124034144) do
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20141124000039) do
     t.integer  "number"
     t.text     "official_title"
     t.string   "sponsor_id"
+  end
+
+  create_table "invites", force: true do |t|
+    t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "leagues", force: true do |t|
