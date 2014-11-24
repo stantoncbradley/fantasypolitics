@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    (function(workingUrl, leagueId) {
+    (function(workingUrl, leagueId, fbAppKey) {
         function statusChangeCallback(response) {
             if (response.status === 'connected') {
                 var container = document.getElementById('mfsBtn'),
@@ -26,7 +26,7 @@
 
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '653406498110718',
+                appId: fbAppKey,
                 cookie: true,  // enable cookies to allow the server to access
                                // the session
                 xfbml: true,  // parse social plugins on this page
@@ -75,7 +75,7 @@
 
         }
 
-    }('<%= params[:working_url] %>', <%= @league.id %>));
+    }('<%= params[:working_url] %>', <%= @league.id %>, <%= Rails.application.secrets.fb_app_key %>));
 </script>
 
 <div class="page-header">
