@@ -71,6 +71,8 @@ window.fbAsyncInit = function() {
 function renderMFS() {
     // First get the list of friends for this user with the Graph API
     FB.api('/me/friends', function(response) {
+        debugger;
+        g
         var mfsList = document.getElementById('mfsList'),
             mfsForm = document.createElement('form'),
             btnContainer = document.getElementById('mfsBtn');
