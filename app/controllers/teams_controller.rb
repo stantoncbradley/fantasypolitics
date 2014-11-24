@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
 
   def edit
     @teams = Team.find(params[:id])
-    respond_with(@teams)
+    render :edit
   end
 
   def update
