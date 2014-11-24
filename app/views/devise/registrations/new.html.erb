@@ -28,4 +28,8 @@
 
         <%= f.submit 'Sign up', class: 'btn btn-success' %>
     <% end %>
+
+    <hr />
+
+    <%= link_to 'Sign up with Facebook', user_omniauth_authorize_path(:facebook) %>
 </div>

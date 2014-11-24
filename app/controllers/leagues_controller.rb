@@ -45,11 +45,11 @@ class LeaguesController < ApplicationController
       @league.save!
 
       Team.create!({
-                       user_id: current_user.id,
-                       league_id: @league.id,
-                       status: 1,
-                       is_moderator: true
-                   })
+           user_id: current_user.id,
+           league_id: @league.id,
+           status: 1,
+           is_moderator: true
+       })
       redirect_to league_path(@league)
     end
   end

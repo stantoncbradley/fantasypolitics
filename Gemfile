@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'unicorn-rails'
 
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'seed_dump'

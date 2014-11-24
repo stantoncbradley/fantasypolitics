@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'leagues/:id', to: 'leagues#show', as: 'league'
   post 'leagues', to: 'leagues#create', as: 'create_league'
 
-  devise_for :users, controllers: { registrations: 'registrations'}
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   authenticated :user do
     root to: 'users#show', as: 'authenticated_root'

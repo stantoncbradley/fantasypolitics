@@ -5,7 +5,19 @@ class InvitesController < ApplicationController
 
   def show
     @invite = Invite.by_session_key(params[:session_key]).first
-    render :show
+    render_404 and return if @invite.nil?
+    render_404 and return if user_signed_in? && Team.by_league(@invite.league_id).by_user(current_user.id).any?
+
+    unless User.from_omniauth(request.env['omniauth.auth']).any?
+      @teams = Team.create!({
+          user_id: current_user.id,
+          league_id: @invite.league.id,
+          status: 1,
+          is_moderator: false
+      })
+    end
+
+    render(:show)
   end
 
   def new
