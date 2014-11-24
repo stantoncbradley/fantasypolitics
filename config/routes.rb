@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'leagues/new', to: 'leagues#new', as: 'new_league'
   get 'leagues/:id/edit', to: 'leagues#edit', as: 'edit_league'
-  put 'leagues/:id', to: 'leagues#update', as: 'update_league'
+  patch 'leagues/:id', to: 'leagues#update', as: 'update_league'
   get 'leagues', to: 'leagues#index', as: 'leagues'
   get 'leagues/:id', to: 'leagues#show', as: 'league'
   post 'leagues', to: 'leagues#create', as: 'create_league'
