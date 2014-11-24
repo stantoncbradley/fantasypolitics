@@ -8,7 +8,7 @@ class InvitesController < ApplicationController
     render_404 and return if @invite.nil?
     render_404 and return if user_signed_in? && Team.by_league(@invite.league_id).by_user(current_user.id).any?
 
-    unless request.env['omniauth.auth'].nil?g
+    unless user_signed_in? && current_user.provider == 'facebook'
       @teams = Team.create!({
           user_id: current_user.id,
           league_id: @invite.league.id,
