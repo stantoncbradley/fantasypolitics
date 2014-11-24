@@ -1,14 +1,13 @@
-(function(league_id) {
+(function() {
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
             var container = document.getElementById('mfsBtn'),
-                inviteBtn = document.createElement('a'),
-                inviteCallback = function() { renderLeagueInvite(league_id); };
+                inviteBtn = document.createElement('a');
             inviteBtn.href = '#';
             inviteBtn.classList.add('btn');
             inviteBtn.classList.add('btn-success');
             inviteBtn.innerHTML = 'Send Invite(s)';
-            inviteBtn.onclick = inviteCallback;
+            inviteBtn.onclick = renderLeagueInvite;
 
             container.innerHTML = '';
             container.appendChild(inviteBtn);
@@ -51,11 +50,10 @@
     }(document, 'script', 'facebook-jssdk'));
 
 
-    function renderLeagueInvite(league_id) {
-        debugger;g
+    function renderLeagueInvite() {
         FB.ui({
             method: 'send',
-            link: 'http://www.fantasy-politics.co/invites/' + league_id
+            link: 'http://www.fantasy-politics.co/invites/' + window.LEAGUE_ID
         }, sendResponse);
 
         function sendResponse(response) {
@@ -63,4 +61,4 @@
         }
     }
 
-}(window.LEAGUE_ID));
+}());
