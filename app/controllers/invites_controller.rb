@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
   before_filter :authenticate_league, only: [:new, :create]
 
   def show
-    @invite = Invite.find(params[:session_key])
+    @invite = Invite.by_session_key(params[:session_key]).first
     render :show
   end
 
