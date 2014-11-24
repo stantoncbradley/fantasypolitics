@@ -18,9 +18,11 @@ class User < ActiveRecord::Base
         provider: auth.provider,
         uid: auth.uid
       })
-      
+
       CreateDemoTeamService.execute(user)
     end
+
+    user
   end
 
   def self.new_with_session(params, session)
