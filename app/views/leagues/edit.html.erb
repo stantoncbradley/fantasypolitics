@@ -2,6 +2,10 @@
 
 <div class="page-header">
   <h1><span class="glyphicon glyphicon-cog"></span> Manage your league</h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li class="active"><%= @league.name %></li>
+  </ol>
 </div>
 
 <% if !flash.empty? %>

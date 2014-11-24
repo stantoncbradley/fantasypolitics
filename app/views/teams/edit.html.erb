@@ -5,14 +5,12 @@
     <% else %>
         <span class="glyphicon glyphicon-cog"></span> Manage
     <% end %> your team
-    <small>
-      <% if @teams.status == 1 %>
-          (<%= @teams.league.name %>)
-      <% else %>
-        <a href="<%= league_path(@teams.league) %>">(<%= @teams.league.name %>)</a>
-      <% end %>
-    </small>
   </h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li><a href="<%= league_path(@teams.league) %>"><%= @teams.league.name %></a></li>
+    <li class="active"><%= @teams.team_name %></li>
+  </ol>
 </div>
 
 <% if !flash.empty? %>
