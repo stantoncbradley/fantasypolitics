@@ -2,8 +2,6 @@
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
             renderMFS();
-        } else {
-            renderLogin();
         }
     }
 
@@ -25,23 +23,7 @@
             version    : 'v2.2' // use version 2.2
         });
 
-
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
-
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-
+        checkLoginState();
     };
 
     // Load the SDK asynchronously
@@ -52,21 +34,6 @@
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
-    function renderLogin() {
-        var mfsList = document.getElementById('mfsList'),
-            fbLoginItem = document.createElement('a');
-
-        fbLoginItem.href = '#';
-        fbLoginItem.classList.add('list-group-item');
-        fbLoginItem.style.textAlign = 'center';
-
-        fbLoginItem.innerHTML = '<fb:login-button scope="public_profile,email,user_friends" ' +
-        'onlogin="checkLoginState();"></fb:login-button>';g
-
-        mfsList.innerHTML = '';
-        mfsList.appendChild(fbLoginItem);
-    }
 
     function renderMFS() {
         // First get the list of friends for this user with the Graph API
