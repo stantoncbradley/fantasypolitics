@@ -71,9 +71,9 @@ window.fbAsyncInit = function() {
 function renderMFS() {
     // First get the list of friends for this user with the Graph API
     FB.api('/me/friends', function(response) {
-        var container = document.getElementById('fb-mfs'),
-            mfsList = document.getElementById('mfsList'),
-            mfsForm = document.createElement('form');
+        var mfsList = document.getElementById('mfsList'),
+            mfsForm = document.createElement('form'),
+            btnContainer = document.getElementById('mfsBtn');
 
         mfsForm.id = 'mfsForm';
 
@@ -81,7 +81,7 @@ function renderMFS() {
         for(var i = 0; i < response.data.length; i++) {
             var friendItem = document.createElement('a');
             friendItem.href = '#';
-            friendItem.class = 'list-group-item';
+            friendItem.classList.add('list-group-item');
             friendItem.id = 'friend_' + response.data[i].id;
             friendItem.innerHTML = '<input type="checkbox" name="friends" value="'
             + response.data[i].id
@@ -94,10 +94,11 @@ function renderMFS() {
         // Create a button to send the Request(s)
         var sendButton = document.createElement('input');
         sendButton.type = 'button';
-        sendButton.class = 'btn btn-success';
+        sendButton.classList.add('btn');
+        sendButton.classList.add('btn-success');
         sendButton.value = 'Send Request(s)';
         sendButton.onclick = sendRequest;
-        container.appendChild(sendButton);
+        btnContainer.appendChild(sendButton);
     });
 
     function sendRequest() {
