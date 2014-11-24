@@ -50,19 +50,24 @@ class LeaguesController < ApplicationController
                        status: 1,
                        is_moderator: true
                    })
-      respond_with(@league)
+      redirect_to league_path(@league)
     end
   end
 
   def update
     # What params can they edit?
     # Name
-    # Users in the league (teams)
+    # users in the league
+    @league = League.find(params[:id])
 
-    league_name = league_params[:name]
-
-
-
+    if league_params[:name].to_s.strip.empty?
+      flash[:alert] = 'Please provide a league name'
+      render :edit
+    else
+      flash[:alert] = 'League name updated'
+      @league.update(league_params)
+      redirect_to edit_league_path(@league)
+    end
   end
 
   private
