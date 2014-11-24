@@ -25,7 +25,7 @@
 
         FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
-        });g
+        });
     };
 
     // Load the SDK asynchronously
