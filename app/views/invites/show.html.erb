@@ -9,5 +9,5 @@
 <% if @teams.nil? %>
     <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %>
 <% else %>
-    <%= render template: 'teams/edit' %>
+    <%= render partial: 'teams/edit_form', locals: { teams: @teams } %>
 <% end %>

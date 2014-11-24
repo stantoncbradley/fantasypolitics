@@ -13,20 +13,4 @@
   </ol>
 </div>
 
-<% if !flash.empty? %>
-    <div id="flash">
-      <% flash.keys.each do |k| %>
-          <div class="alert alert-warning">
-            <%= flash[k] %>
-          </div>
-      <% end %>
-    </div>
-<% end %>
-
-<%= form_for @teams do |t| %>
-    <div class="form-group">
-      <%= t.label :team_name, 'Name:' %>
-      <%= t.text_field :team_name, placeholder: 'Team name', class: 'form-control' %>
-    </div>
-    <%= t.submit value: (@teams.status == 1 ? 'Create' : 'Update'), class: 'btn btn-success' %>
-<% end %>
+<%= render partial: 'edit_form', locals: { teams: @teams } %>
