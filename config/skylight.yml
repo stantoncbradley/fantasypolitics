@@ -1,6 +1,6 @@
 ---
 # The Skylight ID for the application.
-application: giaNGGMKphdQ
+application: <%= ENV['SUNLIGHT_APP_ID'] %>
 
 staging:
   authentication: <%= ENV['SUNLIGHT_AUTHENTICATION'] %>
