@@ -1,14 +1,14 @@
 <div class="page-header">
   <h1>
-    <%= @teams.team_name %>
-    <% if @teams.is_moderator %>
-        &nbsp;<a class="btn btn-default" href="<%= edit_team_path(@teams) %>"><span class="glyphicon glyphicon-cog"></span></a>
+    <%= @team.team_name %>
+    <% if @team.is_moderator %>
+        &nbsp;<a class="btn btn-default" href="<%= edit_team_path(@team) %>"><span class="glyphicon glyphicon-cog"></span></a>
     <% end %>
   </h1>
   <ol class="breadcrumb">
     <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
-    <li><a href="<%= league_path(@teams.league) %>"><%= @teams.league.name %></a></li>
-    <li class="active"><%= @teams.team_name %></li>
+    <li><a href="<%= league_path(@team.league) %>"><%= @team.league.name %></a></li>
+    <li class="active"><%= @team.team_name %></li>
   </ol>
 </div>
 
@@ -33,7 +33,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @teams.politicians.order('points desc').each do |p| %>
+  <% @team.politicians.order('points desc').each do |p| %>
       <tr onclick="location.href='<%= politician_path(p) %>'">
         <td><%= "#{p.first_name} #{p.last_name}" %></td>
         <td><%= p.party %></td>

@@ -63,7 +63,7 @@
     <% end %>
   <% end %>
   <% current_user.teams.each do |t| %>
-      <% t.initiated_trades.each do |tp| %>
+      <% t.instigated_trades.each do |tp| %>
           <tr onclick="location.href='<%= trade_path(tp) %>'">
             <td><%= League.find(t.league_id).name %></td>
             <td><%= Team.find(tp.to_team_id).team_name %></td>

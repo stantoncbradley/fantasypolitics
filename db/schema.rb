@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141123182928) do
-=======
 ActiveRecord::Schema.define(version: 20141124072533) do
->>>>>>> 32a47f23ad7026414e6f7212bd90e16825bef9c6
 
   create_table "bills", force: true do |t|
     t.string   "bill_number"

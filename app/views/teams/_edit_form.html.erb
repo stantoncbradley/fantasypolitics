@@ -1,4 +1,4 @@
-<% if !flash.empty? %>
+<% unless flash.empty? %>
     <div id="flash">
       <% flash.keys.each do |k| %>
           <div class="alert alert-warning">
@@ -8,10 +8,10 @@
     </div>
 <% end %>
 
-<%= form_for teams do |t| %>
+<%= form_for team do |t| %>
     <div class="form-group">
       <%= t.label :team_name, 'Name:' %>
       <%= t.text_field :team_name, placeholder: 'Team name', class: 'form-control' %>
     </div>
-    <%= t.submit value: (teams.status == 1 ? 'Create' : 'Update'), class: 'btn btn-success' %>
+    <%= t.submit value: (team.status == 1 ? 'Create' : 'Update'), class: 'btn btn-success' %>
 <% end %>
