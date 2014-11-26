@@ -1,6 +1,9 @@
 ---
 # The Skylight ID for the application.
-application: <%= ENV['SKYLIGHT_APP_ID'] %>
+application: <%= ENV['SUNLIGHT_APP_ID'] %>
 
-# The authentication token for the application.
-authentication: <%= ENV['SKYLIGHT_AUTHENTICATION'] %>
+staging:
+  authentication: <%= ENV['SUNLIGHT_AUTHENTICATION'] %>
+
+production:
+  authentication: <%= ENV['SUNLIGHT_AUTHENTICATION'] %>
