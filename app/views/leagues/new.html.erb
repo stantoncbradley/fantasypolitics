@@ -1,5 +1,24 @@
-<h1>New league</h1>
+<div class="page-header">
+  <h1><span class="glyphicon glyphicon-plus"></span> Create a league</h1>
+</div>
 
-<%= render 'form' %>
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
 
-<%= link_to 'Back', leagues_path %>
+<%= form_for @league do |l| %>
+
+    <div class="form-group">
+        <%= l.label :name, 'Name:' %>
+        <%= l.text_field :name, placeholder: 'League Name', class: 'form-control' %>
+    </div>
+
+    <%= l.submit 'Create', class: 'btn btn-success' %>
+
+<% end %>

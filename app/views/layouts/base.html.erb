@@ -2,12 +2,18 @@
 <html>
 <head>
   <title>Fantasy Politics</title>
+  <meta property="og:title" content="Fantasy Politics" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= params[:working_url] %>" />
+  <meta property="og:image" content="<%= image_url('logo_image.png') %>" />
+  <meta property="og:description" content="Fantasy Politics raises political awareness by presenting relevant and meaningful content through a fun and simple gaming interface." />
+
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= content_for :stylesheets %>
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
   <%= content_for :javascripts %>
 
   <%= csrf_meta_tags %>

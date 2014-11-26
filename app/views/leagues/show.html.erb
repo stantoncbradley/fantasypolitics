@@ -1,6 +1,25 @@
 <div class="page-header">
-  <h1><%= @league.name %></h1>
+  <h1>
+    <%= @league.name %>
+    <% if @team.is_moderator %>
+        &nbsp;<a class="btn btn-default" href="<%= edit_league_path(@league) %>"><span class="glyphicon glyphicon-cog"></span></a>
+    <% end %>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li class="active"><%= @league.name %></li>
+  </ol>
 </div>
+
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
 
 <table class="table table-responsive table-hoverable">
   <thead>

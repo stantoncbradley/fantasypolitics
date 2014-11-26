@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Join the league</h1>
+  <ol class="breadcrumb">
+    <li>Leagues</li>
+    <li class="active"><%= @invite.league.name %></li>
+  </ol>
+</div>
+
+<% if @teams.nil? %>
+    <p>You must <%= link_to 'sign in with Facebook', user_omniauth_authorize_path(:facebook) %> before you can join this league.</p>
+<% else %>
+    <%= render partial: 'teams/edit_form', locals: { teams: @teams } %>
+<% end %>

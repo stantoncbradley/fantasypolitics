@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>
+    <% if @teams.status == 1 %>
+        <span class="glyphicon glyphicon-plus"></span> Create
+    <% else %>
+        <span class="glyphicon glyphicon-cog"></span> Manage
+    <% end %> your team
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li><a href="<%= league_path(@teams.league) %>"><%= @teams.league.name %></a></li>
+    <li class="active"><%= @teams.team_name %></li>
+  </ol>
+</div>
+
+<%= render partial: 'edit_form', locals: { teams: @teams } %>

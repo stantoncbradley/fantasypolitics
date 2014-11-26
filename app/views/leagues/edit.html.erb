@@ -1,6 +1,114 @@
-<h1>Editing league</h1>
+<script type="text/javascript">
+    (function(workingUrl, leagueId, fbAppKey) {
+        function statusChangeCallback(response) {
+            if (response.status === 'connected') {
+                var container = document.getElementById('mfsBtn'),
+                        inviteBtn = document.createElement('a');
+                inviteBtn.href = '#';
+                inviteBtn.classList.add('btn');
+                inviteBtn.classList.add('btn-success');
+                inviteBtn.innerHTML = 'Send Invite(s)';
+                inviteBtn.onclick = renderLeagueInvite;
 
-<%= render 'form' %>
+                container.innerHTML = '';
+                container.appendChild(inviteBtn);
+            }
+        }
 
-<%= link_to 'Show', @league %> |
-<%= link_to 'Back', leagues_path %>
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: fbAppKey,
+                cookie: true,  // enable cookies to allow the server to access
+                               // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.2' // use version 2.2
+            });
+
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+        function renderLeagueInvite() {
+            var newInvitePath = "/invites/new/" + String(leagueId);
+
+            $.getJSON(newInvitePath, function(data) {
+                var sessionKey = data.invite[0].session_key,
+                    fbLinkPath = [workingUrl, '/invites/', sessionKey].join('');
+
+                var handleFbSendResponse = function(response) {
+                        if (response.success) {
+
+                        } else {
+
+                        }
+                    };
+
+                FB.ui({
+                    method: 'send',
+                    link: fbLinkPath
+                }, handleFbSendResponse);
+            });
+
+
+        }
+
+    }('<%= params[:working_url] %>', <%= @league.id %>, <%= Rails.application.secrets.fb_app_key %>));
+</script>
+
+<div class="page-header">
+  <h1><span class="glyphicon glyphicon-cog"></span> Manage your league</h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li class="active"><%= @league.name %></li>
+  </ol>
+</div>
+
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<%= form_for @league do |l| %>
+    <div class="form-group">
+      <%= l.label :name, 'Change league name' %>
+      <%= l.text_field :name, autofocus: true, placeholder: 'League name', class: 'form-control' %>
+    </div>
+    <%= l.submit 'Save Changes', class: 'btn btn-primary' %>
+<% end %>
+
+<hr />
+
+<label>Invite friends via Facebook</label>
+
+<div id="mfsBtn">
+  <fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();">
+  </fb:login-button>
+</div>

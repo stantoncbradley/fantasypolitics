@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+
+  before_filter :authenticate_user!
 
   respond_to :html
 
@@ -9,39 +10,30 @@ class TeamsController < ApplicationController
   end
 
   def show
-    respond_with(@team)
-  end
-
-  def new
-    @team = Team.new
+    @team = Team.find(params[:id])
     respond_with(@team)
   end
 
   def edit
-  end
-
-  def create
-    @team = Team.new(team_params)
-    @team.save
-    respond_with(@team)
+    @team = Team.find(params[:id])
+    render :edit
   end
 
   def update
-    @team.update(team_params)
-    respond_with(@team)
+    @team = Team.find(params[:id])
+    if team_params[:team_name].to_s.strip.empty?
+      flash[:alert] = 'Please provide a team name'
+      render :edit
+    else
+      TeamSelectorService.execute(@team, @team.league_id) if @team.status == 1
+      @team.update(team_params.merge(status: 2))
+      respond_with(@team)
+    end
   end
 
-  def destroy
-    @team.destroy
-    respond_with(@team)
-  end
 
   private
-    def set_team
-      @team = Team.find(params[:id])
-    end
-
     def team_params
-      params[:team]
+      params.require(:team).permit(:team_name)
     end
 end

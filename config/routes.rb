@@ -11,11 +11,16 @@ Rails.application.routes.draw do
 
   resources :teams
 
-  resources :leagues
-
   resources :trades
 
-  devise_for :users, controllers: { registrations: 'registrations'}
+  get 'leagues/new', to: 'leagues#new', as: 'new_league'
+  get 'leagues/:id/edit', to: 'leagues#edit', as: 'edit_league'
+  patch 'leagues/:id', to: 'leagues#update', as: 'update_league'
+  get 'leagues', to: 'leagues#index', as: 'leagues'
+  get 'leagues/:id', to: 'leagues#show', as: 'league'
+  post 'leagues', to: 'leagues#create', as: 'create_league'
+
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   authenticated :user do
     root to: 'users#show', as: 'authenticated_root'
@@ -26,5 +31,10 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user_show'
 
   get '/import/:method', to: 'import#sunlight'
+
+  get 'invites/new/:league_id', to: 'invites#new', as: 'new_invite'
+  post 'invites', to: 'invites#create', as: 'create_invite'
+  get 'invites/:session_key', to: 'invites#show', as: 'invite'
+
 
 end
