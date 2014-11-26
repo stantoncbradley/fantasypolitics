@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h1>
+    <%= @teams.team_name %>
+    <% if @teams.is_moderator %>
+        &nbsp;<a class="btn btn-default" href="<%= edit_team_path(@teams) %>"><span class="glyphicon glyphicon-cog"></span></a>
+    <% end %>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li><a href="<%= league_path(@teams.league) %>"><%= @teams.league.name %></a></li>
+    <li class="active"><%= @teams.team_name %></li>
+  </ol>
+</div>
+
+<% if !flash.empty? %>
+    <div id="flash">
+      <% flash.keys.each do |k| %>
+          <div class="alert alert-warning">
+            <%= flash[k] %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<table class="table table-responsive table-hoverable">
+  <thead>
+  <tr>
+    <th>Politician</th>
+    <th>Party</th>
+    <th>State</th>
+    <th>Chamber</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @teams.politicians.order('points desc').each do |p| %>
+      <tr onclick="location.href='<%= politician_path(p) %>'">
+        <td><%= "#{p.first_name} #{p.last_name}" %></td>
+        <td><%= p.party %></td>
+        <td><%= state_name(p.state) %></td>
+        <td><%= p.chamber.capitalize %></td>
+        <td><%= p.points %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
