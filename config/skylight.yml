@@ -3,7 +3,7 @@
 application: giaNGGMKphdQ
 
 staging:
-  authentication: oFRKoNXsAa8ksZVBo-ZdSMJR5npzDm19JMFtehvbRCI
+  authentication: <%= ENV['SUNLIGHT_AUTHENTICATION'] %>
 
 production:
-  authentication: AgqMBh-akeXrHjtfK9nYXAKeheJYTXJsayAvx4DOJj0
+  authentication: <%= ENV['SUNLIGHT_AUTHENTICATION'] %>
