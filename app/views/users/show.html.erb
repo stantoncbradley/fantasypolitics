@@ -34,8 +34,10 @@
   </tbody>
 </table>
 
-<%= link_to new_league_path, class: 'btn btn-success' do %>
-    <span class="glyphicon glyphicon-plus"></span> Create a league
+<% if 'inviting users' == 'done' %>
+    <%= link_to new_league_path, class: 'btn btn-success' do %>
+        <span class="glyphicon glyphicon-plus"></span> Create a league
+    <% end %>
 <% end %>
 
 <h4>My Trades</h4>

@@ -4,7 +4,7 @@
 
 <%= form_tag({:action => 'create'}) do %>
     <div>
-      <h3><%= "Select players from team #{@to_team.team_name} that you wish to acquire:" %></h3>
+      <h3><%= "Politicians to acquire from  #{@to_team.team_name}" %></h3>
     </div>
     <table class="table table-responsive table-hoverable">
       <thead>
@@ -33,7 +33,7 @@
     </table>
 
     <div>
-      <h3>Select players from your team to offer:</h3>
+      <h3>Politicians offered by you:</h3>
     </div>
     <table class="table table-responsive table-hoverable">
       <thead>
