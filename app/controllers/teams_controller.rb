@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
     else
       TeamSelectorService.execute(@team, @team.league_id) if @team.status == 1
       @team.update(team_params.merge(status: 2))
-      respond_with(@team)
+      redirect_to league_path @team.league
     end
   end
 
