@@ -19,4 +19,8 @@ class Team < ActiveRecord::Base
         self.by_league(league_id).by_user(user_id).first
     end
 
+    def active_politicians
+        rosters.joins(:politician).select('politicians.*').where('rosters.status = 1')
+    end
+
 end

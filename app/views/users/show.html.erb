@@ -26,8 +26,12 @@
   </thead>
   <tbody>
     <% @eligible_leagues.each do |eligible_league| %>
-        <td><%= eligible_league[:league].name %></td>
-        <td><%= eligible_league[:team].status %></td>
+      <tr onclick="location.href='<%= edit_team_path(eligible_league[:team]) %>'">
+        <% @eligible_leagues.each do |eligible_league| %>
+            <td><%= eligible_league[:league].name %></td>
+            <td><%= eligible_league[:team].status %></td>
+        <%  end %>
+      </tr>
     <%  end %>
   </tbody>
 </table>
