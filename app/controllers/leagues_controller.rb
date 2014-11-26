@@ -13,9 +13,9 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     @team = Team.all.by_league(params[:id]).by_user(current_user.id).first
 
-    if @team.status == 1
+    if @team.status == 'Invited'
       redirect_to edit_team_path(@team)
-    elsif @team.status == 2
+    elsif @team.status == 'Active'
       respond_with @league, @team
     else
       redirect_to root_path
