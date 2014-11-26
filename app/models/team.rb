@@ -12,6 +12,9 @@ class Team < ActiveRecord::Base
     scope :invited_or_joined, ->{ where(status: [1, 2]) }
     scope :moderator, ->{ where(is_moderator: true) }
 
+    enum status: { Removed: 0, Invited: 1, Active: 2 }
+
+
     def self.by_league_and_user league_id, user_id
         self.by_league(league_id).by_user(user_id).first
     end

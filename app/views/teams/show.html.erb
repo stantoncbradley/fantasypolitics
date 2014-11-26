@@ -33,7 +33,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @team.politicians.order('points desc').each do |p| %>
+  <% @team.rosters.by_active.politician.order('points desc').each do |p| %>
       <tr onclick="location.href='<%= politician_path(p) %>'">
         <td><%= "#{p.first_name} #{p.last_name}" %></td>
         <td><%= p.party %></td>
