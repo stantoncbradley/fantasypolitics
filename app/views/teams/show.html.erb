@@ -22,6 +22,10 @@
     </div>
 <% end %>
 
+<%= link_to new_trade_path(:to_team_id => @team.id) do %>
+    <span class="glyphicon glyphicon-plus"></span> Create a trade
+<% end %>
+
 <table class="table table-responsive table-hoverable">
   <thead>
   <tr>
