@@ -1,64 +1,87 @@
 <div class="page-header">
-  <h1><%= "Create Trade with #{@to_team.team_name}" %></h1>
+  <h1>Trade Proprosal</h1>
 </div>
 
 <%= form_tag({:action => 'create'}) do %>
-    <div>
-      <h3><%= "Politicians to acquire from  #{@to_team.team_name}" %></h3>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-success">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <%= "#{@to_team.team_name}'s roster" %>
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <table class="table table-responsive table-hoverable">
+              <thead>
+              <tr>
+                <th>Politician</th>
+                <th>Party</th>
+                <th>State</th>
+                <th>Chamber</th>
+                <th>Points</th>
+                <th>Select</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%= hidden_field_tag 'to_team_id', @to_team.id %>
+              <% @to_team.rosters.each do |r| %>
+                  <tr>
+                    <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+                    <td><%= r.politician.party %></td>
+                    <td><%= state_name(r.politician.state) %></td>
+                    <td><%= r.politician.chamber.capitalize %></td>
+                    <td><%= r.politician.points %></td>
+                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-danger">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Your roster
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            <table class="table table-responsive table-hoverable">
+              <thead>
+              <tr>
+                <th>Politician</th>
+                <th>Party</th>
+                <th>State</th>
+                <th>Chamber</th>
+                <th>Points</th>
+                <th>Select</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%= hidden_field_tag 'from_team_id', @from_team.id %>
+              <% @from_team.rosters.each do |r| %>
+                  <tr>
+                    <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+                    <td><%= r.politician.party %></td>
+                    <td><%= state_name(r.politician.state) %></td>
+                    <td><%= r.politician.chamber.capitalize %></td>
+                    <td><%= r.politician.points %></td>
+                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <table class="table table-responsive table-hoverable">
-      <thead>
-      <tr>
-        <th>Politician</th>
-        <th>Party</th>
-        <th>State</th>
-        <th>Chamber</th>
-        <th>Points</th>
-        <th>Select</th>
-      </tr>
-      </thead>
-      <tbody>
-      <%= hidden_field_tag 'to_team_id', @to_team.id %>
-      <% @to_team.rosters.each do |r| %>
-          <tr>
-            <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
-            <td><%= r.politician.party %></td>
-            <td><%= state_name(r.politician.state) %></td>
-            <td><%= r.politician.chamber.capitalize %></td>
-            <td><%= r.politician.points %></td>
-            <td><%= check_box_tag 'roster_ids[]', r.id %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-
-    <div>
-      <h3>Politicians offered by you:</h3>
+    <div class="form-group">
+      <%= submit_tag('Propose', class: 'btn btn-success') %>
     </div>
-    <table class="table table-responsive table-hoverable">
-      <thead>
-      <tr>
-        <th>Politician</th>
-        <th>Party</th>
-        <th>State</th>
-        <th>Chamber</th>
-        <th>Points</th>
-        <th>Select</th>
-      </tr>
-      </thead>
-      <tbody>
-      <%= hidden_field_tag 'from_team_id', @from_team.id %>
-      <% @from_team.rosters.each do |r| %>
-          <tr>
-            <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
-            <td><%= r.politician.party %></td>
-            <td><%= state_name(r.politician.state) %></td>
-            <td><%= r.politician.chamber.capitalize %></td>
-            <td><%= r.politician.points %></td>
-            <td><%= check_box_tag 'roster_ids[]', r.id %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-    <%= submit_tag('Propose Trade', class: 'btn btn-primary')  %>
 <% end %>
