@@ -40,7 +40,11 @@
         <% @eligible_leagues.each do |eligible_league| %>
             <tr>
               <td>
-                <%= link_to(eligible_league[:team].team_name, team_path(eligible_league[:team])) %>
+                <% if eligible_league[:team].status == 'Invited' %>
+                    <%= eligible_league[:team].team_name %>
+                <% else %>
+                    <%= link_to(eligible_league[:team].team_name, team_path(eligible_league[:team])) %>
+                <% end %>
               </td>
               <td>
                 <%= link_to(eligible_league[:league].name, league_path(eligible_league[:league])) %>
@@ -77,9 +81,10 @@
                 <% if l.teams.by_user(current_user.id).first.status == 'Invited' %>
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
+                        <h4 class="panel-title league-invite">
+                          <span class="label label-success">Invite</span>
                           <a href="<%= league_path(l) %>">
-                            <span class="label label-success">Invite</span> <%= l.name %>
+                             <%= l.name %>
                           </a>
                         </h4>
                       </div>
