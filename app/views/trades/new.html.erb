@@ -27,7 +27,7 @@
               </thead>
               <tbody>
               <%= hidden_field_tag 'to_team_id', @to_team.id %>
-              <% @to_team.rosters.each do |r| %>
+              <% @to_team.rosters.by_active.each do |r| %>
                   <tr>
                     <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                     <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
@@ -65,7 +65,7 @@
               </thead>
               <tbody>
               <%= hidden_field_tag 'from_team_id', @from_team.id %>
-              <% @from_team.rosters.each do |r| %>
+              <%= @from_team.rosters.by_active.each do |r| %>
                   <tr>
                     <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                     <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
