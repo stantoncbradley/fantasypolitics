@@ -1,6 +1,6 @@
 <div class="page-header">
 
-    <h1><span class="glyphicon glyphicon-home"></span> Home Base</h1>
+    <h1><span class="glyphicon glyphicon-home"></span> Home</h1>
   <ol class="breadcrumb">
     <li class="active">Home</li>
   </ol>
@@ -16,61 +16,84 @@
     </div>
 <% end %>
 
-<h4>My Leagues</h4>
-<table class="table table-responsive table-hoverable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @eligible_leagues.each do |eligible_league| %>
-          <tr onclick="location.href='<%= league_path(eligible_league[:league]) %>'">
-            <td><%= eligible_league[:league].name %></td>
-            <td><%= eligible_league[:team].status %></td>
-          </tr>
-      <%  end %>
-  </tbody>
-</table>
 
-<% if 'inviting users' == 'done' %>
-    <%= link_to new_league_path, class: 'btn btn-success' do %>
-        <span class="glyphicon glyphicon-plus"></span> Create a league
-    <% end %>
-<% end %>
+<div role="tabpanel">
 
-<h4>My Trades</h4>
-<table class="table table-responsive table-hoverable">
-  <thead>
-  <tr>
-    <th>League</th>
-    <th>Team</th>
-    <th>Offered by</th>
-    <th>Status</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% current_user.teams.each do |t| %>
-    <% t.offered_trades.each do |to| %>
-      <tr onclick="location.href='<%= trade_path(to) %>'">
-        <td><%= League.find(t.league_id).name %></td>
-        <td><%= Team.find(to.from_team_id).team_name %></td>
-        <td>Them</td>
-        <td><%= to.status %></td>
-      </tr>
-    <% end %>
-  <% end %>
-  <% current_user.teams.each do |t| %>
-      <% t.instigated_trades.each do |tp| %>
-          <tr onclick="location.href='<%= trade_path(tp) %>'">
-            <td><%= League.find(t.league_id).name %></td>
-            <td><%= Team.find(tp.to_team_id).team_name %></td>
-            <td>You</td>
-            <td><%= tp.status %></td>
-          </tr>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#teams" aria-controls="teams" role="tab" data-toggle="tab"><h5>My Teams</h5></a></li>
+    <li role="presentation"><a href="#trades" aria-controls="trades" role="tab" data-toggle="tab"><h5> My Trades</h5></a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="teams">
+      <table class="table table-responsive table-hoverable">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>League</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @eligible_leagues.each do |eligible_league| %>
+            <tr>
+              <td>
+                <%= link_to(eligible_league[:team].team_name, team_path(eligible_league[:team])) %>
+              </td>
+              <td>
+                <%= link_to(eligible_league[:league].name, league_path(eligible_league[:league])) %>
+              </td>
+              <td><%= eligible_league[:team].status %></td>
+            </tr>
+        <%  end %>
+        </tbody>
+      </table>
+
+      <% if 'inviting users' == 'done' %>
+          <%= link_to new_league_path, class: 'btn btn-success' do %>
+              <span class="glyphicon glyphicon-plus"></span> Create a league
+          <% end %>
       <% end %>
-  <% end %>
-  </tbody>
-</table>
+    </div>
+
+
+    <div role="tabpanel" class="tab-pane" id="trades">
+      <table class="table table-responsive table-hoverable">
+        <thead>
+        <tr>
+          <th>League</th>
+          <th>Team</th>
+          <th>Offered by</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% current_user.teams.each do |t| %>
+            <% t.offered_trades.each do |to| %>
+                <tr onclick="location.href='<%= trade_path(to) %>'">
+                  <td><%= League.find(t.league_id).name %></td>
+                  <td><%= Team.find(to.from_team_id).team_name %></td>
+                  <td>Them</td>
+                  <td><%= to.status %></td>
+                </tr>
+            <% end %>
+        <% end %>
+        <% current_user.teams.each do |t| %>
+            <% t.instigated_trades.each do |tp| %>
+                <tr onclick="location.href='<%= trade_path(tp) %>'">
+                  <td><%= League.find(t.league_id).name %></td>
+                  <td><%= Team.find(tp.to_team_id).team_name %></td>
+                  <td>You</td>
+                  <td><%= tp.status %></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
 
