@@ -28,8 +28,9 @@
 
         <%= f.submit 'Sign up', class: 'btn btn-success' %>
     <% end %>
+    <% if 'facebook' == 'done' %>
+        <hr />
 
-    <hr />
-
-    <%= link_to 'Sign up with Facebook', user_omniauth_authorize_path(:facebook) %>
+        <%= link_to 'Sign up with Facebook', user_omniauth_authorize_path(:facebook) %>
+    <% end %>
 </div>

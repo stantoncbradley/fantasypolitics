@@ -24,8 +24,9 @@
     <% end %>
 
     <%= link_to 'Forgot your password?', new_password_path(resource_name) %>
+    <% if 'facebook' == 'done' %>
+        <hr />
 
-  <hr />
-
-  <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %>
+         <%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %>
+    <% end %>
 </div>
