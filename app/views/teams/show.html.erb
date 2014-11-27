@@ -23,7 +23,7 @@
 <% end %>
 
 <% unless @team.user_id == current_user.id %>
-    <%= link_to new_trade_path(:to_team_id => @team.id) do %>
+    <%= link_to new_trade_path(:to_team_id => @team.id), class: 'btn btn-success' do %>
         <span class="glyphicon glyphicon-plus"></span> Create a trade
     <% end %>
 <% end %>
