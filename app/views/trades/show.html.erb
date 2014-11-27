@@ -2,6 +2,7 @@
   <h1><%= "#{@trade.status} Trade" %> <small>(<%= @from_team.league.name %>)</small></h1>
   <ol class="breadcrumb">
     <li><a href="<%= user_show_path(current_user) %>">Home</a></li>
+    <li><a href="<%= league_path(@from_team.league) %>"><%= @from_team.league.name %></a></li>
     <li class="active">Trade Details</li>
   </ol>
 </div>
