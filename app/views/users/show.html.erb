@@ -67,25 +67,42 @@
 
 
     <div role="tabpanel" class="tab-pane" id="leagues">
-      <% current_user.leagues.each do |l| %>
-          <h4><%= l.name %></h4>
-          <table class="table table-responsive table-hoverable">
-            <thead>
-            <th>Team</th>
-            <th>Rank</th>
-            <th>Points</th>
-            </thead>
-            <tbody>
-            <% l.teams.order('points desc').each_with_index do |team, i| %>
-                <tr onclick="location.href='<%= team_path(team) %>'">
-                  <td><%= team.team_name %></td>
-                  <td><%= i + 1 %></td>
-                  <td><%= team.points %></td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-      <% end %>
+      <br />
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <% current_user.leagues.each do |l| %>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%= l.name %>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  <table class="table table-responsive table-hoverable">
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Rank</th>
+                      <th>Points</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% l.teams.order('points desc').each_with_index do |team, i| %>
+                        <tr onclick="location.href='<%= team_path(team) %>'">
+                          <td><%= team.team_name %></td>
+                          <td><%= i + 1 %></td>
+                          <td><%= team.points %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
     </div>
 
 
