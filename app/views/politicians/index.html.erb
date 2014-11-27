@@ -12,25 +12,63 @@
     </div>
 <% end %>
 
-<table class="table table-responsive table-hoverable">
-  <thead>
-    <tr>
-        <th>Name</th>
-        <th>State</th>
-        <th>Party</th>
-        <th>Chamber</th>
-        <th>Points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @politicians.each do |p| %>
-        <tr onclick="location.href='<%= politician_path(p) %>'">
-          <td><%= "#{p.first_name} #{p.last_name}" %></td>
-          <td><%= state_name(p.state) %></td>
-          <td><%= p.party %></td>
-          <td><%= p.chamber.capitalize %></td>
-          <td><%= p.points %></td>
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#senate" aria-controls="senate" role="tab" data-toggle="tab"><h5>Senate</h5></a></li>
+    <li role="presentation"><a href="#house" aria-controls="house" role="tab" data-toggle="tab"><h5>House of Representatives</h5></a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="senate">
+      <table class="table table-responsive table-hoverable">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>State</th>
+          <th>Party</th>
+          <th>Points</th>
         </tr>
-    <% end %>
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+        <% @politicians.senators.order(points: :desc).each do |p| %>
+            <tr onclick="location.href='<%= politician_path(p) %>'">
+              <td><%= "#{p.first_name} #{p.last_name}" %></td>
+              <td><%= state_name(p.state) %></td>
+              <td><%= p.party %></td>
+              <td><%= p.points %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div role="tabpanel" class="tab-pane" id="house">
+      <table class="table table-responsive table-hoverable">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>State</th>
+          <th>Party</th>
+          <th>Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @politicians.representatives.order(points: :desc).each do |p| %>
+            <tr onclick="location.href='<%= politician_path(p) %>'">
+              <td><%= "#{p.first_name} #{p.last_name}" %></td>
+              <td><%= state_name(p.state) %></td>
+              <td><%= p.party %></td>
+              <td><%= p.points %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -16,7 +16,7 @@ class TeamSelectorService
                            team_id: team.id,
                            politician_id: politician.id,
                            league_id: league_id,
-                           active: true
+                           status: 1
                        })
       end
       team.points = team.politicians.inject(0) { |sum, p| sum + p.points }
