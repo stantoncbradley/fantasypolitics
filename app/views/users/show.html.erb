@@ -27,6 +27,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="teams">
+      <br />
       <table class="table table-responsive table-hoverable">
         <thead>
         <tr>
@@ -67,33 +68,55 @@
 
 
     <div role="tabpanel" class="tab-pane" id="leagues">
-      <% current_user.leagues.each do |l| %>
-          <% if l.teams.by_user(current_user.id).first.status == 'Invited' %>
-              <%= link_to("#{l.name} (INVITE)", league_path(l)) %>
-
-          <% elsif l.teams.by_user(current_user.id).first.status == 'Active' %>
-              <table class="table table-responsive table-hoverable">
-                <thead>
-                <th>Team</th>
-                <th>Rank</th>
-                <th>Points</th>
-                </thead>
-                <tbody>
-                <% l.teams.by_active.order('points desc').each_with_index do |team, i| %>
-                    <tr onclick="location.href='<%= team_path(team) %>'">
-                      <td><%= team.team_name %></td>
-                      <td><%= i + 1 %></td>
-                      <td><%= team.points %></td>
-                    </tr>
+      <br />
+        <% unless current_user.leagues.any? %>
+            <h3>You are not in any leagues</h3>
+        <% else %>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <% current_user.leagues.each do |l| %>
+                <% if l.teams.by_user(current_user.id).first.status == 'Invited' %>
+                    <%= link_to("#{l.name} (INVITE)", league_path(l)) %>
+                <% elsif l.teams.by_user(current_user.id).first.status == 'Active' %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%= l.name %>
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          <table class="table table-responsive table-hoverable">
+                            <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Rank</th>
+                              <th>Points</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% l.teams.by_active.order('points desc').each_with_index do |team, i| %>
+                                <tr onclick="location.href='<%= team_path(team) %>'">
+                                  <td><%= team.team_name %></td>
+                                  <td><%= i + 1 %></td>
+                                  <td><%= team.points %></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
                 <% end %>
-                </tbody>
-              </table>
-          <% end %>
-      <% end %>
+            <% end %>
+          </div>
+        <% end %>
     </div>
 
 
     <div role="tabpanel" class="tab-pane" id="trades">
+      <br />
       <table class="table table-responsive table-hoverable">
         <thead>
         <tr>
@@ -146,4 +169,3 @@
   </div>
 
 </div>
-
