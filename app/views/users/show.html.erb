@@ -75,7 +75,15 @@
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <% current_user.leagues.each do |l| %>
                 <% if l.teams.by_user(current_user.id).first.status == 'Invited' %>
-                    <%= link_to("#{l.name} (INVITE)", league_path(l)) %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                          <a href="<%= league_path(l) %>">
+                            (INVITE) <%= l.name %>
+                          </a>
+                        </h4>
+                      </div>
+                    </div>
                 <% elsif l.teams.by_user(current_user.id).first.status == 'Active' %>
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="headingOne">
