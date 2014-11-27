@@ -80,12 +80,12 @@
             <% t.offered_trades.each do |to| %>
                 <tr onclick="location.href='<%= trade_path(to) %>'">
                   <td>
-                    <% if t.status == 'Pending' %>
-                        <span class="label label-warning"><%= t.status %></span>
-                    <% elsif t.status == 'Accepted' %>
-                        <span class="label label-success"><%= t.status %></span>
-                    <% elsif t.status == 'Rejected' %>
-                        <span class="label label-danger"><%= t.status %></span>
+                    <% if to.status == 'Pending' %>
+                        <span class="label label-warning"><%= to.status %></span>
+                    <% elsif to.status == 'Accepted' %>
+                        <span class="label label-success"><%= to.status %></span>
+                    <% elsif to.status == 'Rejected' %>
+                        <span class="label label-danger"><%= to.status %></span>
                     <% end %>
                   </td>
                   <td><%= Team.find(to.from_team_id).team_name %></td>
@@ -97,7 +97,15 @@
         <% current_user.teams.each do |t| %>
             <% t.instigated_trades.each do |tp| %>
                 <tr onclick="location.href='<%= trade_path(tp) %>'">
-                  <td><%= tp.status %></td>
+                  <td>
+                    <% if tp.status == 'Pending' %>
+                        <span class="label label-warning"><%= tp.status %></span>
+                    <% elsif tp.status == 'Accepted' %>
+                        <span class="label label-success"><%= tp.status %></span>
+                    <% elsif tp.status == 'Rejected' %>
+                        <span class="label label-danger"><%= tp.status %></span>
+                    <% end %>
+                  </td>
                   <td><%= Team.find(tp.to_team_id).team_name %></td>
                   <td>You</td>
                   <td><%= League.find(t.league_id).name %></td>
