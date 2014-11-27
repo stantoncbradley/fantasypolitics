@@ -68,23 +68,27 @@
 
     <div role="tabpanel" class="tab-pane" id="leagues">
       <% current_user.leagues.each do |l| %>
-          <h4><%= l.name %></h4>
-          <table class="table table-responsive table-hoverable">
-            <thead>
-            <th>Team</th>
-            <th>Rank</th>
-            <th>Points</th>
-            </thead>
-            <tbody>
-            <% l.teams.by_active.order('points desc').each_with_index do |team, i| %>
-                <tr onclick="location.href='<%= team_path(team) %>'">
-                  <td><%= team.team_name %></td>
-                  <td><%= i + 1 %></td>
-                  <td><%= team.points %></td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
+          <% if l.teams.by_user(current_user.id).first.status == 'Invited' %>
+              <%= link_to("#{l.name} (INVITE)", league_path(l)) %>
+
+          <% elsif l.teams.by_user(current_user.id).first.status == 'Active' %>
+              <table class="table table-responsive table-hoverable">
+                <thead>
+                <th>Team</th>
+                <th>Rank</th>
+                <th>Points</th>
+                </thead>
+                <tbody>
+                <% l.teams.by_active.order('points desc').each_with_index do |team, i| %>
+                    <tr onclick="location.href='<%= team_path(team) %>'">
+                      <td><%= team.team_name %></td>
+                      <td><%= i + 1 %></td>
+                      <td><%= team.points %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+          <% end %>
       <% end %>
     </div>
 
