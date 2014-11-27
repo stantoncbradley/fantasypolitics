@@ -26,18 +26,10 @@
 
 <div>
   <h3>
-    <%= "Politicians to acquire from #{@to_team.team_name}" %>
+    <%= "#{@from_team.team_name} offered #{@to_team.team_name}:" %>
   </h3>
 </div>
-
-<% if current_user.id == @to_team.user_id  %>
-    <div class="alert alert-danger trade-to-panel">
-<% elsif current_user.id == @from_team.user_id %>
     <div class="alert alert-success trade-to-panel">
-<% else %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-<% end %>
 
     <table class="table table-responsive table-hoverable">
       <thead>
@@ -61,29 +53,9 @@
       <% end %>
       </tbody>
     </table>
-<% if current_user.id != @from_team.user_id && current_user.id != @to_team.user_id %>
-    </div>
-<% end %>
 </div>
-
-
-
-<div>
-  <h3>
-    <%= "Politicians offered by #{@from_team.team_name}" %>
-  </h3>
-</div>
-
-<% if current_user.id == @from_team.user_id  %>
     <div class="alert alert-danger trade-to-panel">
-<% elsif current_user.id == @to_team.user_id %>
-    <div class="alert alert-success trade-to-panel">
-<% else %>
-    <div class="panel panel-default">
-        <div class="panel-body">
-<% end %>
-
-    <table class="table table-responsive table-hoverable">
+      <table class="table table-responsive table-hoverable">
       <thead>
       <tr>
         <th>Politician</th>
@@ -105,7 +77,4 @@
       <% end %>
       </tbody>
     </table>
-<% if current_user.id != @from_team.user_id && current_user.id != @to_team.user_id %>
-    </div>
-<% end %>
 </div>
