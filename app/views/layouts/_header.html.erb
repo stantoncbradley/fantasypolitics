@@ -1,28 +1,43 @@
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-    <li class="sidebar-brand">
-      <a href="<%= root_path %>"><%= image_tag 'logo.png' %></a>
-    </li>
-    <% if user_signed_in? %>
-        <li>
-          <a href="<%= user_show_path(current_user) %>"><span class="glyphicon glyphicon-home"></span> Home</a>
-        </li>
-        <li>
-          <a href="<%= bills_path %>"><span class="glyphicon glyphicon-file"></span> Bills</a>
-        </li>
-        <li>
-          <a href="<%= politicians_path %>"><span class="glyphicon glyphicon-user"></span> Politicians</a>
-        </li>
-        <li>
-          <a data-method="delete" href="<%= destroy_user_session_path %>"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
-        </li>
-    <% else %>
-        <li>
-          <a href="<%= new_user_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
-        </li>
-        <li>
-          <a href="<%= new_user_registration_path %>"><span class="glyphicon glyphicon-new-window"></span> Sign up</a>
-        </li>
-    <% end %>
-  </ul>
-</div>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-links" aria-expanded="false" aria-controls="navbar-links">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= image_tag 'logo_image.png', alt: 'Fantasy Politics', class: 'navbar-brand', height: 96 %>
+        <a class="navbar-brand" href="<%= root_path %>">
+          Fantasy Politics
+        </a>
+    </div>
+
+    <div id="navbar-links" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+            <li>
+              <a href="<%= user_show_path(current_user) %>"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </li>
+            <li>
+              <a href="<%= bills_path %>"><span class="glyphicon glyphicon-file"></span> Bills</a>
+            </li>
+            <li>
+              <a href="<%= politicians_path %>"><span class="glyphicon glyphicon-user"></span> Politicians</a>
+            </li>
+            <li>
+              <a data-method="delete" href="<%= destroy_user_session_path %>"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+            </li>
+        <% else %>
+            <li>
+              <a href="<%= new_user_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Log in</a>
+            </li>
+            <li>
+              <a href="<%= new_user_registration_path %>"><span class="glyphicon glyphicon-new-window"></span> Sign up</a>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</nav>
