@@ -6,7 +6,7 @@
     <% end %>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="<%= user_show_path(current_user) %>">My Leagues</a></li>
+    <li><a href="<%= user_show_path(current_user) %>">Home</a></li>
     <li><a href="<%= league_path(@team.league) %>"><%= @team.league.name %></a></li>
     <li class="active"><%= @team.team_name %></li>
   </ol>
