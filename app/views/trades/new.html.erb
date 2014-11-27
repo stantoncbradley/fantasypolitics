@@ -17,24 +17,24 @@
             <table class="table table-responsive table-hoverable">
               <thead>
               <tr>
+                <th><span class="glyphicon glyphicon-check"></span></th>
                 <th>Politician</th>
                 <th>Party</th>
                 <th>State</th>
                 <th>Chamber</th>
                 <th>Points</th>
-                <th>Select</th>
               </tr>
               </thead>
               <tbody>
               <%= hidden_field_tag 'to_team_id', @to_team.id %>
               <% @to_team.rosters.each do |r| %>
                   <tr>
+                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                     <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
                     <td><%= r.politician.party %></td>
                     <td><%= state_name(r.politician.state) %></td>
                     <td><%= r.politician.chamber.capitalize %></td>
                     <td><%= r.politician.points %></td>
-                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                   </tr>
               <% end %>
               </tbody>
@@ -55,24 +55,24 @@
             <table class="table table-responsive table-hoverable">
               <thead>
               <tr>
+                <th><span class="glyphicon glyphicon-check"></span></th>
                 <th>Politician</th>
                 <th>Party</th>
                 <th>State</th>
                 <th>Chamber</th>
                 <th>Points</th>
-                <th>Select</th>
               </tr>
               </thead>
               <tbody>
               <%= hidden_field_tag 'from_team_id', @from_team.id %>
               <% @from_team.rosters.each do |r| %>
                   <tr>
+                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                     <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
                     <td><%= r.politician.party %></td>
                     <td><%= state_name(r.politician.state) %></td>
                     <td><%= r.politician.chamber.capitalize %></td>
                     <td><%= r.politician.points %></td>
-                    <td><%= check_box_tag 'roster_ids[]', r.id %></td>
                   </tr>
               <% end %>
               </tbody>
