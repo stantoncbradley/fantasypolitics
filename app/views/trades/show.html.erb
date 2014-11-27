@@ -26,7 +26,9 @@
 
 <div>
   <h3>
-    <%= "#{@from_team.team_name} #{@trade.status == 'Pending' ? 'offers' : 'offered'} #{@to_team.team_name}" %>
+    <%= link_to(@from_team.team_name, team_path(@from_team)) %>
+    <%= @trade.status == 'Pending' ? ' offers ' : ' offered ' %>
+    <%= link_to(@to_team.team_name, team_path(@to_team)) %>
   </h3>
 </div>
     <div class="alert alert-success trade-to-panel">
