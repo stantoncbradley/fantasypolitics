@@ -1,5 +1,10 @@
 <div class="page-header">
   <h1>Trade Proprosal</h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">Home</a></li>
+    <li><a href="<%= league_path(@from_team.league) %>"><%= @from_team.league.name %></a></li>
+    <li class="active">Trade Proposal</li>
+  </ol>
 </div>
 
 <%= form_tag({:action => 'create'}) do %>
