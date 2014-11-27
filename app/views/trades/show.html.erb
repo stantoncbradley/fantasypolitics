@@ -1,67 +1,106 @@
 <div class="page-header">
-  <h1><%= "Trade #{@trade.id}" %></h1>
-  <h4><%= @trade.status %></h4>
+  <h1><%= "#{@trade.status} Trade" %></h1>
 </div>
-
-<div>
-  <h3><%= "Politicians to acquire from #{@to_team.team_name}" %></h3>
-</div>
-<table class="table table-responsive table-hoverable">
-  <thead>
-  <tr>
-    <th>Politician</th>
-    <th>Party</th>
-    <th>State</th>
-    <th>Chamber</th>
-    <th>Points</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @trade.rosters.where(team_id: @trade.to_team_id).each do |r| %>
-      <tr>
-        <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
-        <td><%= r.politician.party %></td>
-        <td><%= state_name(r.politician.state) %></td>
-        <td><%= r.politician.chamber.capitalize %></td>
-        <td><%= r.politician.points %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<div>
-  <h3><%= "Politicians offered by #{@from_team.team_name}" %></h3>
-</div>
-<table class="table table-responsive table-hoverable">
-  <thead>
-  <tr>
-    <th>Politician</th>
-    <th>Party</th>
-    <th>State</th>
-    <th>Chamber</th>
-    <th>Points</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @trade.rosters.where(team_id: @trade.from_team_id).each do |r| %>
-      <tr>
-        <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
-        <td><%= r.politician.party %></td>
-        <td><%= state_name(r.politician.state) %></td>
-        <td><%= r.politician.chamber.capitalize %></td>
-        <td><%= r.politician.points %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
 
 <% if @trade.status == 'Pending' %>
     <% if current_user.id == @to_team.user_id %>
-        <%= link_to('Accept', edit_trade_path(@trade, status: 'Accepted'), class: 'btn btn-primary') %>
-        <%= link_to('Reject', edit_trade_path(@trade, status: 'Rejected'), class: 'btn btn-primary') %>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="tradeActionDropdown" data-toggle="dropdown" aria-expanded="true">
+            Accept or Reject Trade
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu trade-action-ul" role="menu" aria-labelledby="tradeActionDropdown">
+            <li class="trade-accept" role="presentation"><a href="<%= edit_trade_path(@trade, status: 'Accepted') %>" role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-ok"></span> Accept</a></li>
+            <li class="trade-reject" role="presentation"><a href="<%= edit_trade_path(@trade, status: 'Rejected') %>" role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-remove"></span> Reject</a></li>
+          </ul>
+        </div>
     <% elsif current_user.id == @from_team.user_id %>
-        <%= link_to('Cancel Trade', edit_trade_path(@trade, status: 'Rejected'), class: 'btn btn-primary') %>
+        <%= link_to('Cancel Trade', edit_trade_path(@trade, status: 'Rejected'), class: 'btn btn-danger') %>
     <% end %>
 <% end %>
 
-<%= link_to('Home', root_path(current_user), class: 'btn btn-primary') %>
+<div>
+  <h3>
+    <%= "Politicians to acquire from #{@to_team.team_name}" %>
+  </h3>
+</div>
+
+<% if current_user.id == @to_team.user_id  %>
+    <div class="alert alert-danger trade-to-panel">
+<% elsif current_user.id == @from_team.user_id %>
+    <div class="alert alert-success trade-to-panel">
+<% else %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+<% end %>
+
+    <table class="table table-responsive table-hoverable">
+      <thead>
+      <tr>
+        <th>Politician</th>
+        <th>Party</th>
+        <th>State</th>
+        <th>Chamber</th>
+        <th>Points</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @trade.rosters.where(team_id: @trade.to_team_id).each do |r| %>
+          <tr>
+            <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+            <td><%= r.politician.party %></td>
+            <td><%= state_name(r.politician.state) %></td>
+            <td><%= r.politician.chamber.capitalize %></td>
+            <td><%= r.politician.points %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% if current_user.id != @from_team.user_id && current_user.id != @to_team.user_id %>
+    </div>
+<% end %>
+</div>
+
+
+
+<div>
+  <h3>
+    <%= "Politicians offered by #{@from_team.team_name}" %>
+  </h3>
+</div>
+
+<% if current_user.id == @from_team.user_id  %>
+    <div class="alert alert-danger trade-to-panel">
+<% elsif current_user.id == @to_team.user_id %>
+    <div class="alert alert-success trade-to-panel">
+<% else %>
+    <div class="panel panel-default">
+        <div class="panel-body">
+<% end %>
+
+    <table class="table table-responsive table-hoverable">
+      <thead>
+      <tr>
+        <th>Politician</th>
+        <th>Party</th>
+        <th>State</th>
+        <th>Chamber</th>
+        <th>Points</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @trade.rosters.where(team_id: @trade.from_team_id).each do |r| %>
+          <tr>
+            <td><%= "#{r.politician.first_name} #{r.politician.last_name}" %></td>
+            <td><%= r.politician.party %></td>
+            <td><%= state_name(r.politician.state) %></td>
+            <td><%= r.politician.chamber.capitalize %></td>
+            <td><%= r.politician.points %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% if current_user.id != @from_team.user_id && current_user.id != @to_team.user_id %>
+    </div>
+<% end %>
+</div>

@@ -157,3 +157,47 @@
     }
   }
 }
+
+  .alert-danger {
+    .table-hoverable {
+      > tbody {
+        > tr:hover {
+          > td {
+            background-color: darken($alert-danger-bg, 5%);
+          }
+        }
+      }
+    }
+  }
+
+  .alert-success {
+    .table-hoverable {
+      > tbody {
+        > tr:hover {
+          > td {
+            background-color: darken($alert-success-bg, 5%);
+          }
+        }
+      }
+    }
+  }
+
+.trade-action-ul {
+  li.trade-accept {
+    a {
+      color: $brand-success;
+    }
+    a:hover {
+      color: darken($brand-success, 20%);
+    }
+  }
+  li.trade-reject {
+    a {
+      color: $brand-danger;
+    }
+    a:hover {
+      color: darken($brand-danger, 20%);
+    }
+  }
+}
+
