@@ -1,5 +1,9 @@
 <div class="page-header">
   <h1><%= "#{@trade.status} Trade" %></h1>
+  <ol class="breadcrumb">
+    <li><a href="<%= user_show_path(current_user) %>">Home</a></li>
+    <li class="active">Trade Details</li>
+  </ol>
 </div>
 
 <% if @trade.status == 'Pending' %>
