@@ -76,7 +76,7 @@
             <th>Points</th>
             </thead>
             <tbody>
-            <% l.teams.order('points desc').each_with_index do |team, i| %>
+            <% l.teams.by_active.order('points desc').each_with_index do |team, i| %>
                 <tr onclick="location.href='<%= team_path(team) %>'">
                   <td><%= team.team_name %></td>
                   <td><%= i + 1 %></td>
