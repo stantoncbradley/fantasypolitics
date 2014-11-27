@@ -18,6 +18,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#teams" aria-controls="teams" role="tab" data-toggle="tab"><h5>My Teams</h5></a></li>
+    <li role="presentation"><a href="#leagues" aria-controls="leagues" role="tab" data-toggle="tab"><h5>My Leagues</h5></a></li>
     <li role="presentation"><a href="#trades" aria-controls="trades" role="tab" data-toggle="tab"><h5> My Trades</h5></a></li>
   </ul>
 
@@ -51,6 +52,29 @@
           <%= link_to new_league_path, class: 'btn btn-success' do %>
               <span class="glyphicon glyphicon-plus"></span> Create a league
           <% end %>
+      <% end %>
+    </div>
+
+
+    <div role="tabpanel" class="tab-pane" id="leagues">
+      <% current_user.leagues.each do |l| %>
+          <h4><%= l.name %></h4>
+          <table class="table table-responsive table-hoverable">
+            <thead>
+            <th>Team</th>
+            <th>Rank</th>
+            <th>Points</th>
+            </thead>
+            <tbody>
+            <% l.teams.order('points desc').each_with_index do |team, i| %>
+                <tr onclick="location.href='<%= team_path(team) %>'">
+                  <td><%= team.team_name %></td>
+                  <td><%= i + 1 %></td>
+                  <td><%= team.points %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
       <% end %>
     </div>
 
